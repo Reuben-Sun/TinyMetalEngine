@@ -13,6 +13,7 @@
 		235DE9F3286F49E0006709F3 /* plane.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F2286F49E0006709F3 /* plane.obj */; };
 		235DE9F7286F49F9006709F3 /* plane.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F6286F49F9006709F3 /* plane.mtl */; };
 		235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F8286F5372006709F3 /* Textures.xcassets */; };
+		235DE9FB286F588A006709F3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9FA286F588A006709F3 /* GameScene.swift */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		235DE9F2286F49E0006709F3 /* plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plane.obj; sourceTree = "<group>"; };
 		235DE9F6286F49F9006709F3 /* plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plane.mtl; sourceTree = "<group>"; };
 		235DE9F8286F5372006709F3 /* Textures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Textures.xcassets; sourceTree = "<group>"; };
+		235DE9FA286F588A006709F3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				2BF6A287286F0A7F0091B9D8 /* Mesh.swift */,
 				2BF6A289286F0A8F0091B9D8 /* Submesh.swift */,
 				235DE9F0286F3B91006709F3 /* TextureController.swift */,
+				235DE9FA286F588A006709F3 /* GameScene.swift */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				235DE9FB286F588A006709F3 /* GameScene.swift in Sources */,
 				2BF6A25C286EC5040091B9D8 /* Options.swift in Sources */,
 				2BF6A25A286EC4D40091B9D8 /* MetalView.swift in Sources */,
 				2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */,

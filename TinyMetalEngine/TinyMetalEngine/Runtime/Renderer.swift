@@ -18,14 +18,7 @@ class Renderer: NSObject {
     var quadPipelineState: MTLRenderPipelineState!
     var depthStencilState: MTLDepthStencilState!
     
-    lazy var house: Model = {
-        Model(name: "lowpoly-house.obj")
-    }()
-    lazy var ground: Model = {
-        var ground = Model(name: "plane.obj")
-        ground.tiling = 16
-        return ground
-    }()
+    lazy var scene = GameScene()
     
     var timer: Float = 0
     var uniforms = Uniforms()
@@ -109,13 +102,11 @@ extension Renderer: MTKViewDelegate {
         timer += 0.005
         uniforms.viewMatrix = float4x4(translation: [0, 1.5, -5]).inverse
         encoder.setRenderPipelineState(modelPipelineState)
-        //一个旋转的房子
-        house.rotation.y = sin(timer)
-        house.render(encoder: encoder, uniforms: uniforms, params: params)
-        //地面
-        ground.scale = 40
-        ground.rotation.y = sin(timer)
-        ground.render(encoder: encoder, uniforms: uniforms, params: params)
+        //场景渲染
+        scene.update(deltaTime: timer)
+        for model in scene.models {
+            model.render(encoder: encoder, uniforms: uniforms, params: params)
+        }
     }
     
     /// 画平面
