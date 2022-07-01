@@ -29,9 +29,12 @@ struct GameScene {
     }
     
     //相机
-    var camera = FPCamera()
+//    var camera = FPCamera()
+    var camera = ArcballCamera()
     init() {
         camera.position = [0, 1.5, -5]
+        camera.distance = length(camera.position)
+        camera.target = [0, 1.2, 0]
     }
     mutating func update(size: CGSize) {
         camera.update(size: size)
