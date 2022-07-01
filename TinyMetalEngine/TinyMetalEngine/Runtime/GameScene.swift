@@ -24,7 +24,7 @@ struct GameScene {
     /// Swift知识：mutating是异变函数的关键词，使得不可变的结构体，通过创建新结构体赋值的方式可变
     mutating func update(deltaTime: Float) {
         ground.scale = 40
-        camera.rotation.y = sin(deltaTime)
+        camera.update(deltaTime: deltaTime)
         
     }
     

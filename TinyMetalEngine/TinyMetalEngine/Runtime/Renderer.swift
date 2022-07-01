@@ -20,7 +20,7 @@ class Renderer: NSObject {
     
     lazy var scene = GameScene()
     
-    var timer: Float = 0
+    var lastTime: Double = CFAbsoluteTimeGetCurrent()
     var uniforms = Uniforms()
     var params = Params()
     
@@ -89,10 +89,11 @@ extension Renderer: MTKViewDelegate {
     func renderModel(encoder: MTLRenderCommandEncoder) {
         encoder.setRenderPipelineState(modelPipelineState)
         
-        timer += 0.005
-        encoder.setRenderPipelineState(modelPipelineState)
-        //场景渲染
-        scene.update(deltaTime: timer)
+        let currentTime = CFAbsoluteTimeGetCurrent()
+        let deltaTime = Float(currentTime - lastTime)
+        lastTime = currentTime
+        scene.update(deltaTime: deltaTime)
+        
         uniforms.viewMatrix = scene.camera.viewMatrix
         uniforms.projectionMatrix = scene.camera.projectionMatrix
         
