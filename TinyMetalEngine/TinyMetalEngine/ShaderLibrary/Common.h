@@ -21,4 +21,18 @@ typedef struct {
   uint height;
 } Params;
 
+typedef enum {
+  Position = 0,
+  Normal = 1,
+  UV = 2
+} Attributes;
+
+typedef enum {
+  VertexBuffer = 0,
+  UVBuffer = 1,
+  UniformsBuffer = 11,
+  ParamsBuffer = 12
+} BufferIndices;
+
+
 #endif /* Common_h */

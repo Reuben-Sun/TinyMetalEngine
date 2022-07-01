@@ -19,7 +19,7 @@ class Renderer: NSObject {
     var depthStencilState: MTLDepthStencilState!
     
     lazy var model: Model = {
-        Model(device: Renderer.device, name: "train.usd")
+        Model(name: "lowpoly-house.obj")
     }()
     
     var timer: Float = 0
@@ -102,16 +102,10 @@ extension Renderer: MTKViewDelegate {
         encoder.setRenderPipelineState(modelPipelineState)
         
         timer += 0.005
-        uniforms.viewMatrix = float4x4(translation: [0, 0, -2]).inverse
-        model.position.y = -0.6
+        uniforms.viewMatrix = float4x4(translation: [0, 1.5, -5]).inverse
+        encoder.setRenderPipelineState(modelPipelineState)
         model.rotation.y = sin(timer)
-        uniforms.modelMatrix = model.transform.modelMatrix
-        encoder.setVertexBytes(
-            &uniforms,
-            length: MemoryLayout<Uniforms>.stride,
-            index: 11)
-        
-        model.render(encoder: encoder)
+        model.render(encoder: encoder, uniforms: uniforms, params: params)
     }
     
     /// 画平面
@@ -130,10 +124,6 @@ extension Renderer: MTKViewDelegate {
         }
         
         renderEncoder.setDepthStencilState(depthStencilState)
-        renderEncoder.setFragmentBytes(
-          &params,
-          length: MemoryLayout<Uniforms>.stride,
-          index: 12)
         
         if options.renderChoice == .train {
             renderModel(encoder: renderEncoder)

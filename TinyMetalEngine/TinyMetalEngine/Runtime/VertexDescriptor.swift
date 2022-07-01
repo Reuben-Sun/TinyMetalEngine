@@ -18,21 +18,40 @@ extension MDLVertexDescriptor {
         let vertexDescriptor = MDLVertexDescriptor()
         var offset = 0
         //顶点坐标
-        vertexDescriptor.attributes[0] = MDLVertexAttribute(
+        vertexDescriptor.attributes[Position.index] = MDLVertexAttribute(
             name: MDLVertexAttributePosition,
             format: .float3,
             offset: 0,
-            bufferIndex: 0)
+            bufferIndex: VertexBuffer.index)
         offset += MemoryLayout<float3>.stride
         //顶点法线
-        vertexDescriptor.attributes[1] = MDLVertexAttribute(
+        vertexDescriptor.attributes[Normal.index] = MDLVertexAttribute(
             name: MDLVertexAttributeNormal,
             format: .float3,
             offset: offset,
-            bufferIndex: 0)
+            bufferIndex: VertexBuffer.index)
         offset += MemoryLayout<float3>.stride
-        //最终顶点尺寸
-        vertexDescriptor.layouts[0] = MDLVertexBufferLayout(stride: offset)
+        
+        vertexDescriptor.layouts[VertexBuffer.index] = MDLVertexBufferLayout(stride: offset)
+        //uv
+        vertexDescriptor.attributes[UV.index] = MDLVertexAttribute(
+            name: MDLVertexAttributeTextureCoordinate,
+            format: .float2,
+            offset: 0,
+            bufferIndex: UVBuffer.index)
+        vertexDescriptor.layouts[UVBuffer.index] = MDLVertexBufferLayout(stride: MemoryLayout<float2>.stride)
         return vertexDescriptor
     }
+}
+
+extension Attributes {
+  var index: Int {
+    return Int(self.rawValue)
+  }
+}
+
+extension BufferIndices {
+  var index: Int {
+    return Int(self.rawValue)
+  }
 }

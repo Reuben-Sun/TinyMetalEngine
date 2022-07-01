@@ -9,55 +9,72 @@ import MetalKit
 
 class Model: Transformable {
     var transform = Transform()
-    let mesh: MTKMesh
+    let meshes: [Mesh]
     let name: String
     
     /// 模型加载
     /// - Parameters:
-    ///   - device: 设备
     ///   - name: 模型名称（含后缀）
-    init(device: MTLDevice, name: String) {
+    init(name: String) {
         guard let assetURL = Bundle.main.url(
-            forResource: name,
-            withExtension: nil) else {
+          forResource: name,
+          withExtension: nil) else {
             fatalError("Model: \(name) not found")
-        }
-        
-        let allocator = MTKMeshBufferAllocator(device: device)
+          }
+        let allocator = MTKMeshBufferAllocator(device: Renderer.device)
         let asset = MDLAsset(
-            url: assetURL,
-            vertexDescriptor: .defaultLayout,
-            bufferAllocator: allocator)
-        if let mdlMesh =
-            asset.childObjects(of: MDLMesh.self).first as? MDLMesh {
-            do {
-                mesh = try MTKMesh(mesh: mdlMesh, device: device)
-            } catch {
-                fatalError("Failed to load mesh")
-            }
-        } else {
-            fatalError("No mesh available")
+          url: assetURL,
+          vertexDescriptor: .defaultLayout,
+          bufferAllocator: allocator)
+        let (mdlMeshes, mtkMeshes) = try! MTKMesh.newMeshes(
+          asset: asset,
+          device: Renderer.device)
+        meshes = zip(mdlMeshes, mtkMeshes).map {
+          Mesh(mdlMesh: $0.0, mtkMesh: $0.1)
         }
         self.name = name
-    }
+      }
 }
 
 // Rendering
 extension Model {
-    func render(encoder: MTLRenderCommandEncoder) {
-        encoder.setVertexBuffer(
-            mesh.vertexBuffers[0].buffer,
-            offset: 0,
-            index: 0)
+    func render(encoder: MTLRenderCommandEncoder, uniforms vertex: Uniforms,
+                params fragment:Params) {
+        var uniforms = vertex
+        var params = fragment
         
-        for submesh in mesh.submeshes {
+        uniforms.modelMatrix = transform.modelMatrix
+        
+        encoder.setVertexBytes(
+          &uniforms,
+          length: MemoryLayout<Uniforms>.stride,
+          index: UniformsBuffer.index)
+
+        encoder.setFragmentBytes(
+          &params,
+          length: MemoryLayout<Uniforms>.stride,
+          index: ParamsBuffer.index)
+
+        for mesh in meshes {
+          for (index, vertexBuffer) in mesh.vertexBuffers.enumerated() {
+            encoder.setVertexBuffer(
+              vertexBuffer,
+              offset: 0,
+              index: index)
+          }
+
+          for submesh in mesh.submeshes {
+
+            // set the fragment texture here
+
             encoder.drawIndexedPrimitives(
-                type: .triangle,
-                indexCount: submesh.indexCount,
-                indexType: submesh.indexType,
-                indexBuffer: submesh.indexBuffer.buffer,
-                indexBufferOffset: submesh.indexBuffer.offset
+              type: .triangle,
+              indexCount: submesh.indexCount,
+              indexType: submesh.indexType,
+              indexBuffer: submesh.indexBuffer,
+              indexBufferOffset: submesh.indexBufferOffset
             )
+          }
         }
     }
 }
