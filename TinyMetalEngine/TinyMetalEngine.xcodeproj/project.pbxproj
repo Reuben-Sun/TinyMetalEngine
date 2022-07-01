@@ -15,6 +15,7 @@
 		235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F8286F5372006709F3 /* Textures.xcassets */; };
 		235DE9FB286F588A006709F3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9FA286F588A006709F3 /* GameScene.swift */; };
 		235DE9FD286F5BC5006709F3 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9FC286F5BC5006709F3 /* Camera.swift */; };
+		235DE9FF286F6292006709F3 /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9FE286F6292006709F3 /* InputController.swift */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		235DE9F8286F5372006709F3 /* Textures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Textures.xcassets; sourceTree = "<group>"; };
 		235DE9FA286F588A006709F3 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		235DE9FC286F5BC5006709F3 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		235DE9FE286F6292006709F3 /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				235DE9F0286F3B91006709F3 /* TextureController.swift */,
 				235DE9FA286F588A006709F3 /* GameScene.swift */,
 				235DE9FC286F5BC5006709F3 /* Camera.swift */,
+				235DE9FE286F6292006709F3 /* InputController.swift */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */,
 				2BF6A262286EC5880091B9D8 /* Transform.swift in Sources */,
 				2BF6A288286F0A7F0091B9D8 /* Mesh.swift in Sources */,
+				235DE9FF286F6292006709F3 /* InputController.swift in Sources */,
 				2BF6A260286EC56A0091B9D8 /* Model.swift in Sources */,
 				2BF6A25E286EC5460091B9D8 /* Renderer.swift in Sources */,
 				2BF6A26A286EC6C60091B9D8 /* Vertex.metal in Sources */,

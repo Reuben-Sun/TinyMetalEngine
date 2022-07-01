@@ -25,6 +25,7 @@ struct GameScene {
     mutating func update(deltaTime: Float) {
         ground.scale = 40
         camera.rotation.y = sin(deltaTime)
+        
     }
     
     //相机
