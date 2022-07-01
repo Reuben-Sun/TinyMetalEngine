@@ -82,17 +82,7 @@ class Renderer: NSObject {
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        let aspect = Float(view.bounds.width) / Float(view.bounds.height)
-        let projectionMatrix =
-        float4x4(
-            projectionFov: Float(70).degreesToRadians,
-            near: 0.1,
-            far: 100,
-            aspect: aspect)
-        uniforms.projectionMatrix = projectionMatrix
-        
-        params.width = UInt32(size.width)
-        params.height = UInt32(size.height)
+        scene.update(size: size)
     }
     
     /// 画模型
@@ -100,10 +90,12 @@ extension Renderer: MTKViewDelegate {
         encoder.setRenderPipelineState(modelPipelineState)
         
         timer += 0.005
-        uniforms.viewMatrix = float4x4(translation: [0, 1.5, -5]).inverse
         encoder.setRenderPipelineState(modelPipelineState)
         //场景渲染
         scene.update(deltaTime: timer)
+        uniforms.viewMatrix = scene.camera.viewMatrix
+        uniforms.projectionMatrix = scene.camera.projectionMatrix
+        
         for model in scene.models {
             model.render(encoder: encoder, uniforms: uniforms, params: params)
         }

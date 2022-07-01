@@ -9,6 +9,7 @@ import MetalKit
 
 /// 创建场景
 struct GameScene {
+    //模型
     lazy var house: Model = {
         Model(name: "lowpoly-house.obj")
     }()
@@ -19,12 +20,22 @@ struct GameScene {
         return ground
     }()
     lazy var models: [Model] = [ground, house]
-    
     /// 更新场景
     /// Swift知识：mutating是异变函数的关键词，使得不可变的结构体，通过创建新结构体赋值的方式可变
     mutating func update(deltaTime: Float) {
         ground.scale = 40
-        ground.rotation.y = sin(deltaTime)
-        house.rotation.y = sin(deltaTime)
+        camera.rotation.y = sin(deltaTime)
     }
+    
+    //相机
+    var camera = FPCamera()
+    init() {
+        camera.position = [0, 1.5, -5]
+    }
+    mutating func update(size: CGSize) {
+        camera.update(size: size)
+    }
+    
+    
+    
 }
