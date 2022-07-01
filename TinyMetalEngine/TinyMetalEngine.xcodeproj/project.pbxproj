@@ -11,6 +11,16 @@
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
 		2BF6A24B286EC3DD0091B9D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A24A286EC3DD0091B9D8 /* Preview Assets.xcassets */; };
+		2BF6A25A286EC4D40091B9D8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A259286EC4D40091B9D8 /* MetalView.swift */; };
+		2BF6A25C286EC5040091B9D8 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A25B286EC5040091B9D8 /* Options.swift */; };
+		2BF6A25E286EC5460091B9D8 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A25D286EC5460091B9D8 /* Renderer.swift */; };
+		2BF6A260286EC56A0091B9D8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A25F286EC56A0091B9D8 /* Model.swift */; };
+		2BF6A262286EC5880091B9D8 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A261286EC5880091B9D8 /* Transform.swift */; };
+		2BF6A264286EC5B00091B9D8 /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */; };
+		2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A266286EC6990091B9D8 /* MathLibrary.swift */; };
+		2BF6A26A286EC6C60091B9D8 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A269286EC6C60091B9D8 /* Vertex.metal */; };
+		2BF6A26C286EC6D10091B9D8 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A26B286EC6D10091B9D8 /* Fragment.metal */; };
+		2BF6A270286EC7A90091B9D8 /* train.usd in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A26F286EC7A90091B9D8 /* train.usd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +30,17 @@
 		2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BF6A24A286EC3DD0091B9D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2BF6A24C286EC3DD0091B9D8 /* TinyMetalEngine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TinyMetalEngine.entitlements; sourceTree = "<group>"; };
+		2BF6A259286EC4D40091B9D8 /* MetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		2BF6A25B286EC5040091B9D8 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		2BF6A25D286EC5460091B9D8 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		2BF6A25F286EC56A0091B9D8 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2BF6A261286EC5880091B9D8 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
+		2BF6A265286EC5CF0091B9D8 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		2BF6A266286EC6990091B9D8 /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
+		2BF6A269286EC6C60091B9D8 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
+		2BF6A26B286EC6D10091B9D8 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
+		2BF6A26F286EC7A90091B9D8 /* train.usd */ = {isa = PBXFileReference; lastKnownFileType = file; path = train.usd; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +96,10 @@
 		2BF6A252286EC3FA0091B9D8 /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				2BF6A25D286EC5460091B9D8 /* Renderer.swift */,
+				2BF6A25F286EC56A0091B9D8 /* Model.swift */,
+				2BF6A261286EC5880091B9D8 /* Transform.swift */,
+				2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -82,6 +107,7 @@
 		2BF6A253286EC4050091B9D8 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				2BF6A266286EC6990091B9D8 /* MathLibrary.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -89,6 +115,8 @@
 		2BF6A254286EC40F0091B9D8 /* ShaderLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2BF6A268286EC6B80091B9D8 /* Shaders */,
+				2BF6A265286EC5CF0091B9D8 /* Common.h */,
 			);
 			path = ShaderLibrary;
 			sourceTree = "<group>";
@@ -105,6 +133,7 @@
 		2BF6A256286EC4200091B9D8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2BF6A26F286EC7A90091B9D8 /* train.usd */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -121,8 +150,19 @@
 			children = (
 				2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */,
 				2BF6A245286EC3DA0091B9D8 /* ContentView.swift */,
+				2BF6A259286EC4D40091B9D8 /* MetalView.swift */,
+				2BF6A25B286EC5040091B9D8 /* Options.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		2BF6A268286EC6B80091B9D8 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				2BF6A269286EC6C60091B9D8 /* Vertex.metal */,
+				2BF6A26B286EC6D10091B9D8 /* Fragment.metal */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +225,7 @@
 			files = (
 				2BF6A24B286EC3DD0091B9D8 /* Preview Assets.xcassets in Resources */,
 				2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */,
+				2BF6A270286EC7A90091B9D8 /* train.usd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +236,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BF6A25C286EC5040091B9D8 /* Options.swift in Sources */,
+				2BF6A25A286EC4D40091B9D8 /* MetalView.swift in Sources */,
+				2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */,
+				2BF6A26C286EC6D10091B9D8 /* Fragment.metal in Sources */,
 				2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */,
+				2BF6A262286EC5880091B9D8 /* Transform.swift in Sources */,
+				2BF6A260286EC56A0091B9D8 /* Model.swift in Sources */,
+				2BF6A25E286EC5460091B9D8 /* Renderer.swift in Sources */,
+				2BF6A26A286EC6C60091B9D8 /* Vertex.metal in Sources */,
+				2BF6A264286EC5B00091B9D8 /* VertexDescriptor.swift in Sources */,
 				2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +309,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = TinyMetalEngine/ShaderLibrary/Common.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -312,6 +363,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = TinyMetalEngine/ShaderLibrary/Common.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;

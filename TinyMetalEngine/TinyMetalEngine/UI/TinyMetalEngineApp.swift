@@ -11,7 +11,7 @@ import SwiftUI
 struct TinyMetalEngineApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().navigationTitle("Tiny Metal Engine")
         }
     }
 }
