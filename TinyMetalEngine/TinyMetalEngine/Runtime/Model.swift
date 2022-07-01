@@ -11,14 +11,13 @@ class Model: Transformable {
     var transform = Transform()
     let meshes: [Mesh]
     let name: String
+    var tiling: UInt32 = 1
     
     /// 模型加载
     /// - Parameters:
     ///   - name: 模型名称（含后缀）
     init(name: String) {
-        guard let assetURL = Bundle.main.url(
-          forResource: name,
-          withExtension: nil) else {
+        guard let assetURL = Bundle.main.url(forResource: name, withExtension: nil) else {
             fatalError("Model: \(name) not found")
           }
         let allocator = MTKMeshBufferAllocator(device: Renderer.device)
@@ -44,6 +43,7 @@ extension Model {
         var params = fragment
         
         uniforms.modelMatrix = transform.modelMatrix
+        params.tiling = tiling
         
         encoder.setVertexBytes(
           &uniforms,

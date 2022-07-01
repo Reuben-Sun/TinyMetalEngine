@@ -18,8 +18,13 @@ class Renderer: NSObject {
     var quadPipelineState: MTLRenderPipelineState!
     var depthStencilState: MTLDepthStencilState!
     
-    lazy var model: Model = {
+    lazy var house: Model = {
         Model(name: "lowpoly-house.obj")
+    }()
+    lazy var ground: Model = {
+        var ground = Model(name: "plane.obj")
+        ground.tiling = 16
+        return ground
     }()
     
     var timer: Float = 0
@@ -104,12 +109,26 @@ extension Renderer: MTKViewDelegate {
         timer += 0.005
         uniforms.viewMatrix = float4x4(translation: [0, 1.5, -5]).inverse
         encoder.setRenderPipelineState(modelPipelineState)
-        model.rotation.y = sin(timer)
-        model.render(encoder: encoder, uniforms: uniforms, params: params)
+        //一个旋转的房子
+        house.rotation.y = sin(timer)
+        house.render(encoder: encoder, uniforms: uniforms, params: params)
+        //地面
+        ground.scale = 40
+        ground.rotation.y = sin(timer)
+        ground.render(encoder: encoder, uniforms: uniforms, params: params)
     }
     
     /// 画平面
     func renderQuad(encoder: MTLRenderCommandEncoder) {
+        encoder.setVertexBytes(
+          &uniforms,
+          length: MemoryLayout<Uniforms>.stride,
+          index: UniformsBuffer.index)
+
+        encoder.setFragmentBytes(
+          &params,
+          length: MemoryLayout<Uniforms>.stride,
+          index: ParamsBuffer.index)
         encoder.setRenderPipelineState(quadPipelineState)
         encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
@@ -125,7 +144,7 @@ extension Renderer: MTKViewDelegate {
         
         renderEncoder.setDepthStencilState(depthStencilState)
         
-        if options.renderChoice == .train {
+        if options.renderChoice == .model {
             renderModel(encoder: renderEncoder)
         } else {
             renderQuad(encoder: renderEncoder)
