@@ -41,6 +41,7 @@
 		2BF6A269286EC6C60091B9D8 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
 		2BF6A26B286EC6D10091B9D8 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
 		2BF6A26F286EC7A90091B9D8 /* train.usd */ = {isa = PBXFileReference; lastKnownFileType = file; path = train.usd; sourceTree = "<group>"; };
+		2BF6A286286F08860091B9D8 /* CustomCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCore.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +118,7 @@
 			children = (
 				2BF6A268286EC6B80091B9D8 /* Shaders */,
 				2BF6A265286EC5CF0091B9D8 /* Common.h */,
+				2BF6A286286F08860091B9D8 /* CustomCore.h */,
 			);
 			path = ShaderLibrary;
 			sourceTree = "<group>";

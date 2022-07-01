@@ -24,6 +24,7 @@ class Renderer: NSObject {
     
     var timer: Float = 0
     var uniforms = Uniforms()
+    var params = Params()
     
     init(metalView: MTKView, options: Options) {
         
@@ -91,6 +92,9 @@ extension Renderer: MTKViewDelegate {
             far: 100,
             aspect: aspect)
         uniforms.projectionMatrix = projectionMatrix
+        
+        params.width = UInt32(size.width)
+        params.height = UInt32(size.height)
     }
     
     /// 画模型
@@ -126,6 +130,10 @@ extension Renderer: MTKViewDelegate {
         }
         
         renderEncoder.setDepthStencilState(depthStencilState)
+        renderEncoder.setFragmentBytes(
+          &params,
+          length: MemoryLayout<Uniforms>.stride,
+          index: 12)
         
         if options.renderChoice == .train {
             renderModel(encoder: renderEncoder)
