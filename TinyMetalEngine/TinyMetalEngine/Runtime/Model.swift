@@ -12,6 +12,10 @@ class Model: Transformable {
     let mesh: MTKMesh
     let name: String
     
+    /// 模型加载
+    /// - Parameters:
+    ///   - device: 设备
+    ///   - name: 模型名称（含后缀）
     init(device: MTLDevice, name: String) {
         guard let assetURL = Bundle.main.url(
             forResource: name,

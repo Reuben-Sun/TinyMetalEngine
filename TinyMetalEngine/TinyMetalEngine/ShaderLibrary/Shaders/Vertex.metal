@@ -11,22 +11,21 @@ using namespace metal;
 
 struct VertexIn {
     float4 position [[attribute(0)]];
+    float3 normal [[attribute(1)]];
 };
 
 struct VertexOut {
     float4 position [[position]];
+    float3 normal;
 };
 
 vertex VertexOut vertex_main(
                              VertexIn in [[stage_in]],
                              constant Uniforms &uniforms [[buffer(11)]])
 {
-    float4 position =
-    uniforms.projectionMatrix * uniforms.viewMatrix
-    * uniforms.modelMatrix * in.position;
-    VertexOut out {
-        .position = position
-    };
+    VertexOut out;
+    out.position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * in.position;
+    out.normal = in.normal;
     return out;
 }
 
