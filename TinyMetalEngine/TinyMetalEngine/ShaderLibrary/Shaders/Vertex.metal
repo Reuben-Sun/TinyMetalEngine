@@ -11,8 +11,9 @@ using namespace metal;
 #import "../CustomCore.h"
 
 struct VertexIn {
-    float4 position [[attribute(0)]];
-    float3 normal [[attribute(1)]];
+  float4 position [[attribute(Position)]];
+  float3 normal [[attribute(Normal)]];
+  float2 uv [[attribute(UV)]];
 };
 
 vertex VertexOut vertex_main(
@@ -22,6 +23,7 @@ vertex VertexOut vertex_main(
     VertexOut out;
     out.position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * in.position;
     out.normal = in.normal;
+    out.uv = in.uv;
     return out;
 }
 

@@ -12,8 +12,9 @@
 using namespace metal;
 
 struct VertexOut {
-  float4 position [[position]];
-  float3 normal;
+    float4 position [[position]];
+    float3 normal;
+    float2 uv;
 };
 
 #endif /* CustomCore_h */
