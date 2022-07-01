@@ -30,11 +30,14 @@ struct GameScene {
     
     //相机
 //    var camera = FPCamera()
-    var camera = ArcballCamera()
+//    var camera = ArcballCamera()
+    var camera = OrthographicCamera()
     init() {
         camera.position = [0, 1.5, -5]
-        camera.distance = length(camera.position)
-        camera.target = [0, 1.2, 0]
+//        camera.distance = length(camera.position)
+//        camera.target = [0, 1.2, 0]
+        camera.position = [0, 2, 0]
+        camera.rotation.x = .pi / 2
     }
     mutating func update(size: CGSize) {
         camera.update(size: size)
