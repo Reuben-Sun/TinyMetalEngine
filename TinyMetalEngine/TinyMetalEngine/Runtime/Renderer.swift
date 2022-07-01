@@ -16,6 +16,7 @@ class Renderer: NSObject {
     
     var modelPipelineState: MTLRenderPipelineState!
     var quadPipelineState: MTLRenderPipelineState!
+    var depthStencilState: MTLDepthStencilState!
     
     lazy var model: Model = {
         Model(device: Renderer.device, name: "train.usd")
@@ -33,6 +34,7 @@ class Renderer: NSObject {
         Renderer.device = device
         Renderer.commandQueue = commandQueue
         metalView.device = device
+        metalView.depthStencilPixelFormat = .depth32Float
         
         // create the shader function library
         let library = device.makeDefaultLibrary()
@@ -46,21 +48,19 @@ class Renderer: NSObject {
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = quadVertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.colorAttachments[0].pixelFormat =
-        metalView.colorPixelFormat
+        pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
         do {
             quadPipelineState =
-            try device.makeRenderPipelineState(
-                descriptor: pipelineDescriptor)
+            try device.makeRenderPipelineState( descriptor: pipelineDescriptor)
             pipelineDescriptor.vertexFunction = modelVertexFunction
-            pipelineDescriptor.vertexDescriptor =
-            MTLVertexDescriptor.defaultLayout
+            pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
             modelPipelineState =
-            try device.makeRenderPipelineState(
-                descriptor: pipelineDescriptor)
+            try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch let error {
             fatalError(error.localizedDescription)
         }
+        depthStencilState = Renderer.buildDepthStencilState()
         self.options = options
         super.init()
         metalView.clearColor = MTLClearColor(
@@ -71,15 +71,19 @@ class Renderer: NSObject {
         metalView.delegate = self
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
     }
+    
+    /// 构建 depth stencil state
+    static func buildDepthStencilState() -> MTLDepthStencilState? {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.isDepthWriteEnabled = true
+        descriptor.depthCompareFunction = .less
+        return Renderer.device.makeDepthStencilState(descriptor: descriptor)
+    }
 }
 
 extension Renderer: MTKViewDelegate {
-    func mtkView(
-        _ view: MTKView,
-        drawableSizeWillChange size: CGSize
-    ) {
-        let aspect =
-        Float(view.bounds.width) / Float(view.bounds.height)
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        let aspect = Float(view.bounds.width) / Float(view.bounds.height)
         let projectionMatrix =
         float4x4(
             projectionFov: Float(70).degreesToRadians,
@@ -89,6 +93,7 @@ extension Renderer: MTKViewDelegate {
         uniforms.projectionMatrix = projectionMatrix
     }
     
+    /// 画模型
     func renderModel(encoder: MTLRenderCommandEncoder) {
         encoder.setRenderPipelineState(modelPipelineState)
         
@@ -105,20 +110,22 @@ extension Renderer: MTKViewDelegate {
         model.render(encoder: encoder)
     }
     
+    /// 画平面
     func renderQuad(encoder: MTLRenderCommandEncoder) {
         encoder.setRenderPipelineState(quadPipelineState)
         encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
     
+    
     func draw(in view: MTKView) {
-        guard
-            let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-            let descriptor = view.currentRenderPassDescriptor,
-            let renderEncoder =
-                commandBuffer.makeRenderCommandEncoder(
-                    descriptor: descriptor) else {
+        guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
+              let descriptor = view.currentRenderPassDescriptor,
+              let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)
+        else {
             return
         }
+        
+        renderEncoder.setDepthStencilState(depthStencilState)
         
         if options.renderChoice == .train {
             renderModel(encoder: renderEncoder)
