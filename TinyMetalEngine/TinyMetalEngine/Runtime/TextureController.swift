@@ -15,6 +15,11 @@ enum TextureController {
     /// - Returns: 贴图
     static func loadTexture(filename: String) throws -> MTLTexture? {
         let textureLoader = MTKTextureLoader(device: Renderer.device)
+        //优先使用Asset Catalog加载贴图
+        if let texture = try? textureLoader.newTexture(name: filename, scaleFactor: 1.0, bundle: Bundle.main, options: nil){
+            print("loaded texture: \(filename)")
+            return texture
+        }
         //贴图加载机制（零点位置，伽马矫正，Mipmap）
         let textureLoaderOptions: [MTKTextureLoader.Option: Any] = [.origin: MTKTextureLoader.Origin.bottomLeft,
                                                                     .SRGB: false,

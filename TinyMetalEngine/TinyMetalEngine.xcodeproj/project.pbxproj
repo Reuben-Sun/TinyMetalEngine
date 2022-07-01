@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9E9286F30CD006709F3 /* lowpoly-house.obj */; };
-		235DE9EC286F30DD006709F3 /* lowpoly-house-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9EB286F30DD006709F3 /* lowpoly-house-color.png */; };
 		235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */; };
 		235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9F0286F3B91006709F3 /* TextureController.swift */; };
 		235DE9F3286F49E0006709F3 /* plane.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F2286F49E0006709F3 /* plane.obj */; };
-		235DE9F5286F49ED006709F3 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F4286F49ED006709F3 /* ground.png */; };
 		235DE9F7286F49F9006709F3 /* plane.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F6286F49F9006709F3 /* plane.mtl */; };
+		235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9F8286F5372006709F3 /* Textures.xcassets */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -34,12 +33,11 @@
 
 /* Begin PBXFileReference section */
 		235DE9E9286F30CD006709F3 /* lowpoly-house.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.obj"; sourceTree = "<group>"; };
-		235DE9EB286F30DD006709F3 /* lowpoly-house-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lowpoly-house-color.png"; sourceTree = "<group>"; };
 		235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.mtl"; sourceTree = "<group>"; };
 		235DE9F0286F3B91006709F3 /* TextureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureController.swift; sourceTree = "<group>"; };
 		235DE9F2286F49E0006709F3 /* plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plane.obj; sourceTree = "<group>"; };
-		235DE9F4286F49ED006709F3 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		235DE9F6286F49F9006709F3 /* plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plane.mtl; sourceTree = "<group>"; };
+		235DE9F8286F5372006709F3 /* Textures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Textures.xcassets; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -176,8 +174,7 @@
 		2BF6A257286EC42B0091B9D8 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				235DE9F4286F49ED006709F3 /* ground.png */,
-				235DE9EB286F30DD006709F3 /* lowpoly-house-color.png */,
+				235DE9F8286F5372006709F3 /* Textures.xcassets */,
 			);
 			path = Textures;
 			sourceTree = "<group>";
@@ -263,8 +260,7 @@
 				2BF6A24B286EC3DD0091B9D8 /* Preview Assets.xcassets in Resources */,
 				235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */,
 				235DE9F3286F49E0006709F3 /* plane.obj in Resources */,
-				235DE9EC286F30DD006709F3 /* lowpoly-house-color.png in Resources */,
-				235DE9F5286F49ED006709F3 /* ground.png in Resources */,
+				235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */,
 				235DE9F7286F49F9006709F3 /* plane.mtl in Resources */,
 				235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */,
 				2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */,
