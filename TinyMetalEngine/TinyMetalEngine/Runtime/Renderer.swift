@@ -7,8 +7,6 @@
 
 import MetalKit
 
-// swiftlint:disable implicitly_unwrapped_optional
-
 class Renderer: NSObject {
   static var device: MTLDevice!
   static var commandQueue: MTLCommandQueue!
@@ -27,9 +25,9 @@ class Renderer: NSObject {
   var uniforms = Uniforms()
 
   init(metalView: MTKView, options: Options) {
-    guard
-      let device = MTLCreateSystemDefaultDevice(),
-      let commandQueue = device.makeCommandQueue() else {
+      
+    guard let device = MTLCreateSystemDefaultDevice(),
+          let commandQueue = device.makeCommandQueue() else {
         fatalError("GPU not available")
     }
     Renderer.device = device
