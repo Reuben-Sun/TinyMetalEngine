@@ -16,13 +16,17 @@ float3 phongLighting(float3 normalWS,
                      float3 positionWS,
                      constant Params &params,
                      constant Light *lights,
-                     float3 baseColor)
+                     Material material)
 {
     float3 diffuseColor = 0;
     float3 ambientColor = 0;
     float3 specularColor = 0;
-    float materialShininess = 32;
-    float3 materialSpecularColor = float3(1, 1, 1);
+    
+    float3 baseColor = material.baseColor;
+    float materialShininess = material.shininess;
+    float3 materialSpecularColor = material.specularColor;
+    
+
     
     for (uint i = 0; i < params.lightCount; i++){
         Light light = lights[i];

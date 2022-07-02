@@ -78,7 +78,10 @@ extension Model {
                 //传入贴图
                 encoder.setFragmentTexture(submesh.textures.baseColor, index: BaseColor.index)
                 encoder.setFragmentTexture(submesh.textures.normal, index: NormalTexture.index)
-                
+                //传入材质
+                var material = submesh.material
+                encoder.setFragmentBytes(&material, length: MemoryLayout<Material>.stride, index: MaterialBuffer.index)
+                //绘制
                 encoder.drawIndexedPrimitives(
                     type: .triangle,
                     indexCount: submesh.indexCount,

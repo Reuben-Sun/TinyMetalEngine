@@ -39,15 +39,15 @@ fragment float4 fragment_main(constant Params &params [[buffer(12)]],
                               VertexOut in [[stage_in]],
                               texture2d<float> baseColorTexture [[texture(BaseColor)]],
                               texture2d<float> normalTexture [[texture(NormalTexture)]],
+                              constant Material &_material [[buffer(MaterialBuffer)]],
                               constant Light *lights [[buffer(LightBuffer)]])
 {
+    Material mat = _material;
+    
     constexpr sampler textureSampler(filter::linear, address::repeat, mip_filter::linear);   //采样器
     //baseColor
-    float3 baseColor;
-    if (is_null_texture(baseColorTexture)) {
-        baseColor = in.color;
-    } else {
-        baseColor = baseColorTexture.sample(textureSampler, in.uv * params.tiling).rgb;
+    if (!is_null_texture(baseColorTexture)) {
+        mat.baseColor = baseColorTexture.sample(textureSampler, in.uv * params.tiling).rgb;
     }
     
     float3 normalWS;
@@ -60,7 +60,7 @@ fragment float4 fragment_main(constant Params &params [[buffer(12)]],
         normalWS = TBN * normalWS;
     }
     
-    float3 color = phongLighting(normalWS, in.positionWS, params, lights, baseColor);
+    float3 color = phongLighting(normalWS, in.positionWS, params, lights, mat);
     return float4(color, 1);
 }
 

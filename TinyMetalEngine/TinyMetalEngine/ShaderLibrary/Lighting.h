@@ -14,6 +14,6 @@ float3 phongLighting(float3 normalWS,
                      float3 positionWS,
                      constant Params &params,
                      constant Light *lights,
-                     float3 baseColor);
+                     Material material);
 
 #endif /* Lighting_h */
