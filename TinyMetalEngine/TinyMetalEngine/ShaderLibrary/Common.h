@@ -63,7 +63,7 @@ typedef struct {
     vector_float3 color;
     vector_float3 specularColor;
     float radius;
-    vector_float3 attenuation;
+    vector_float3 attenuation;  //x: 恒定衰减系数，y: 线性衰减系数，z: 二次衰减系数
     float coneAngle;
     vector_float3 coneDirection;
     float coneAttenuation;
