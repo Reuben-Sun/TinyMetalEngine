@@ -29,7 +29,11 @@ class Model: Transformable {
         var mtkMeshes: [MTKMesh] = []
         let mdlMeshes = asset.childObjects(of: MDLMesh.self) as? [MDLMesh] ?? []
         _ = mdlMeshes.map {
-            mdlMesh in mdlMesh.addNormals(withAttributeNamed: MDLVertexAttributeNormal, creaseThreshold: 1.0)
+//            mdlMesh in mdlMesh.addNormals(withAttributeNamed: MDLVertexAttributeNormal, creaseThreshold: 1.0)
+            mdlMesh in mdlMesh.addTangentBasis(
+                forTextureCoordinateAttributeNamed: MDLVertexAttributeTextureCoordinate,
+                normalAttributeNamed: MDLVertexAttributeTangent,
+                tangentAttributeNamed: MDLVertexAttributeBitangent)
             mtkMeshes.append(try! MTKMesh(mesh: mdlMesh, device: Renderer.device))
         }
         

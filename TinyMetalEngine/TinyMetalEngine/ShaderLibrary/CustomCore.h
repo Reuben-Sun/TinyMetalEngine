@@ -18,6 +18,8 @@ struct VertexOut {
     float3 color;
     float3 positionWS;
     float3 normalWS;
+    float3 tangentWS;
+    float3 bitangentWS;
 };
 
 struct Input {

@@ -31,13 +31,17 @@ typedef enum {
     Position = 0,
     Normal = 1,
     UV = 2,
-    Color = 3
+    Color = 3,
+    Tangent = 4,
+    Bitangent = 5
 } Attributes;
 
 typedef enum {
     VertexBuffer = 0,
     UVBuffer = 1,
     ColorBuffer = 2,
+    TangentBuffer = 3,
+    BitangentBuffer = 4,
     UniformsBuffer = 11,
     ParamsBuffer = 12,
     LightBuffer = 13

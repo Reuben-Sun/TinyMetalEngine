@@ -11,7 +11,7 @@ import MetalKit
 struct GameScene {
     //模型
     lazy var sphere: Model = {
-        Model(device: Renderer.device, name: "sphere.obj")
+        Model(device: Renderer.device, name: "cube.obj")
     }()
     lazy var gizmo: Model = {
         Model(device: Renderer.device, name: "gizmo.usd")
