@@ -90,6 +90,37 @@
 			path = Materials;
 			sourceTree = "<group>";
 		};
+		235DEA04286FE9FF006709F3 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				235DE9FE286F6292006709F3 /* InputController.swift */,
+				235DEA00286F679F006709F3 /* Movement.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		235DEA06286FEB1F006709F3 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				235DE9FA286F588A006709F3 /* GameScene.swift */,
+				235DE9FC286F5BC5006709F3 /* Camera.swift */,
+				235DEA02286F7736006709F3 /* PlayerCamera.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		235DEA07286FEB8E006709F3 /* ResourceSystem */ = {
+			isa = PBXGroup;
+			children = (
+				2BF6A261286EC5880091B9D8 /* Transform.swift */,
+				2BF6A289286F0A8F0091B9D8 /* Submesh.swift */,
+				2BF6A25F286EC56A0091B9D8 /* Model.swift */,
+				2BF6A287286F0A7F0091B9D8 /* Mesh.swift */,
+				235DE9F0286F3B91006709F3 /* TextureController.swift */,
+			);
+			path = ResourceSystem;
+			sourceTree = "<group>";
+		};
 		2BF6A237286EC3DA0091B9D8 = {
 			isa = PBXGroup;
 			children = (
@@ -109,11 +140,12 @@
 		2BF6A242286EC3DA0091B9D8 /* TinyMetalEngine */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA06286FEB1F006709F3 /* Editor */,
+				2BF6A252286EC3FA0091B9D8 /* Runtime */,
 				2BF6A258286EC4370091B9D8 /* UI */,
 				2BF6A255286EC41A0091B9D8 /* Assets */,
 				2BF6A254286EC40F0091B9D8 /* ShaderLibrary */,
 				2BF6A253286EC4050091B9D8 /* Utility */,
-				2BF6A252286EC3FA0091B9D8 /* Runtime */,
 				2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */,
 				2BF6A24C286EC3DD0091B9D8 /* TinyMetalEngine.entitlements */,
 				2BF6A249286EC3DD0091B9D8 /* Preview Content */,
@@ -132,18 +164,10 @@
 		2BF6A252286EC3FA0091B9D8 /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA07286FEB8E006709F3 /* ResourceSystem */,
+				235DEA04286FE9FF006709F3 /* Input */,
 				2BF6A25D286EC5460091B9D8 /* Renderer.swift */,
-				2BF6A25F286EC56A0091B9D8 /* Model.swift */,
-				2BF6A261286EC5880091B9D8 /* Transform.swift */,
 				2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */,
-				2BF6A287286F0A7F0091B9D8 /* Mesh.swift */,
-				2BF6A289286F0A8F0091B9D8 /* Submesh.swift */,
-				235DE9F0286F3B91006709F3 /* TextureController.swift */,
-				235DE9FA286F588A006709F3 /* GameScene.swift */,
-				235DE9FC286F5BC5006709F3 /* Camera.swift */,
-				235DE9FE286F6292006709F3 /* InputController.swift */,
-				235DEA00286F679F006709F3 /* Movement.swift */,
-				235DEA02286F7736006709F3 /* PlayerCamera.swift */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
