@@ -25,6 +25,7 @@ vertex VertexOut vertex_main(
     out.position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * in.position;
     out.normal = in.normal;
     out.uv = in.uv;
+    out.color = in.color;
     return out;
 }
 
