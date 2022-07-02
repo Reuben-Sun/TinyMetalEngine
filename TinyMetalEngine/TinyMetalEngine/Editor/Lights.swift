@@ -58,8 +58,8 @@ struct Lights {
     /// 灯光初始化
     init() {
         lights.append(sunlight)
-        lights.append(ambientLight)
-        lights.append(redLight)
-        lights.append(spotlight)
+//        lights.append(ambientLight)
+//        lights.append(redLight)
+//        lights.append(spotlight)
     }
 }

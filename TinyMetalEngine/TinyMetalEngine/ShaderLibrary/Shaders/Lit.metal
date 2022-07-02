@@ -54,8 +54,8 @@ fragment float4 fragment_main(constant Params &params [[buffer(12)]],
     }
     float3 N = normalize(normal);
     
-//    float3 color = phongLighting(N, in.positionWS, params, lights, baseColor);
-    return float4(N, 1);
+    float3 color = phongLighting(N, in.positionWS, params, lights, baseColor);
+    return float4(color, 1);
 }
 
 
