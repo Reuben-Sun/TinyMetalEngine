@@ -36,8 +36,8 @@
 		2BF6A262286EC5880091B9D8 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A261286EC5880091B9D8 /* Transform.swift */; };
 		2BF6A264286EC5B00091B9D8 /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */; };
 		2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A266286EC6990091B9D8 /* MathLibrary.swift */; };
-		2BF6A26A286EC6C60091B9D8 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A269286EC6C60091B9D8 /* Vertex.metal */; };
-		2BF6A26C286EC6D10091B9D8 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A26B286EC6D10091B9D8 /* Fragment.metal */; };
+		2BF6A26A286EC6C60091B9D8 /* Lit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A269286EC6C60091B9D8 /* Lit.metal */; };
+		2BF6A26C286EC6D10091B9D8 /* DebugLights.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A26B286EC6D10091B9D8 /* DebugLights.metal */; };
 		2BF6A270286EC7A90091B9D8 /* train.usd in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A26F286EC7A90091B9D8 /* train.usd */; };
 		2BF6A288286F0A7F0091B9D8 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A287286F0A7F0091B9D8 /* Mesh.swift */; };
 		2BF6A28A286F0A8F0091B9D8 /* Submesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A289286F0A8F0091B9D8 /* Submesh.swift */; };
@@ -77,8 +77,8 @@
 		2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
 		2BF6A265286EC5CF0091B9D8 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		2BF6A266286EC6990091B9D8 /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
-		2BF6A269286EC6C60091B9D8 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
-		2BF6A26B286EC6D10091B9D8 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
+		2BF6A269286EC6C60091B9D8 /* Lit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lit.metal; sourceTree = "<group>"; };
+		2BF6A26B286EC6D10091B9D8 /* DebugLights.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DebugLights.metal; sourceTree = "<group>"; };
 		2BF6A26F286EC7A90091B9D8 /* train.usd */ = {isa = PBXFileReference; lastKnownFileType = file; path = train.usd; sourceTree = "<group>"; };
 		2BF6A286286F08860091B9D8 /* CustomCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCore.h; sourceTree = "<group>"; };
 		2BF6A287286F0A7F0091B9D8 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
@@ -255,8 +255,8 @@
 		2BF6A268286EC6B80091B9D8 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				2BF6A269286EC6C60091B9D8 /* Vertex.metal */,
-				2BF6A26B286EC6D10091B9D8 /* Fragment.metal */,
+				2BF6A269286EC6C60091B9D8 /* Lit.metal */,
+				2BF6A26B286EC6D10091B9D8 /* DebugLights.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				2BF6A25C286EC5040091B9D8 /* Options.swift in Sources */,
 				2BF6A25A286EC4D40091B9D8 /* MetalView.swift in Sources */,
 				2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */,
-				2BF6A26C286EC6D10091B9D8 /* Fragment.metal in Sources */,
+				2BF6A26C286EC6D10091B9D8 /* DebugLights.metal in Sources */,
 				2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */,
 				235DEA1428701E23006709F3 /* Lighting.metal in Sources */,
 				235DEA1128701599006709F3 /* Lights.swift in Sources */,
@@ -358,7 +358,7 @@
 				235DE9FF286F6292006709F3 /* InputController.swift in Sources */,
 				2BF6A260286EC56A0091B9D8 /* Model.swift in Sources */,
 				2BF6A25E286EC5460091B9D8 /* Renderer.swift in Sources */,
-				2BF6A26A286EC6C60091B9D8 /* Vertex.metal in Sources */,
+				2BF6A26A286EC6C60091B9D8 /* Lit.metal in Sources */,
 				2BF6A264286EC5B00091B9D8 /* VertexDescriptor.swift in Sources */,
 				2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */,
 				2BF6A28A286F0A8F0091B9D8 /* Submesh.swift in Sources */,

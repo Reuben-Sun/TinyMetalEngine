@@ -1,5 +1,5 @@
 //
-//  Fragment.metal
+//  Vertex.metal
 //  TinyMetalEngine
 //
 //  Created by bytedance on 2022/7/1.
@@ -10,6 +10,26 @@ using namespace metal;
 #import "../Lighting.h"
 #import "../CustomCore.h"
 
+struct VertexIn {
+  float4 position [[attribute(Position)]];
+  float3 normal [[attribute(Normal)]];
+  float2 uv [[attribute(UV)]];
+    float3 color [[attribute(Color)]];
+};
+
+vertex VertexOut vertex_main(
+                             VertexIn in [[stage_in]],
+                             constant Uniforms &uniforms [[buffer(11)]])
+{
+    VertexOut out;
+    out.position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * in.position;
+    out.normal = in.normal;
+    out.uv = in.uv;
+    out.color = in.color;
+    out.positionWS = (uniforms.modelMatrix * in.position).xyz;
+    out.normalWS = uniforms.normalMatrix * in.normal;
+    return out;
+}
 
 fragment float4 fragment_main(constant Params &params [[buffer(12)]],
                               VertexOut in [[stage_in]],
@@ -28,3 +48,5 @@ fragment float4 fragment_main(constant Params &params [[buffer(12)]],
     float3 color = phongLighting(N, in.positionWS, params, lights, baseColor);
     return float4(color, 1);
 }
+
+
