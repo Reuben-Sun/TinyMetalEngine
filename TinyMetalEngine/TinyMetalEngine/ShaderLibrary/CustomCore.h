@@ -22,7 +22,6 @@ struct VertexOut {
     float3 bitangentWS;
 };
 
-constant float pi = 3.1415926535897932384626433832795;
 
 struct Input {
     

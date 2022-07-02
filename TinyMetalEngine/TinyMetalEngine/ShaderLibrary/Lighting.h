@@ -16,4 +16,14 @@ float3 phongLighting(float3 normalWS,
                      constant Light *lights,
                      Material material);
 
+float3 computeDiffuse(Material material,
+                      float3 normalWS,
+                      float3 lightDir);
+
+// functions
+float3 computeSpecular(float3 normal,
+                       float3 viewDirection,
+                       float3 lightDirection,
+                       float roughness,
+                       float3 F0);
 #endif /* Lighting_h */
