@@ -16,6 +16,7 @@ struct Submesh {
     
     struct Textures{
         let baseColor: MTLTexture?
+        let normal: MTLTexture?
     }
 }
 
@@ -41,5 +42,6 @@ extension Submesh.Textures{
             return texture
         }
         baseColor = property(with: MDLMaterialSemantic.baseColor)
+        normal = property(with: .tangentSpaceNormal)
     }
 }

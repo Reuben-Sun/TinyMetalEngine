@@ -66,8 +66,9 @@ extension Model {
             
             for submesh in mesh.submeshes {
                 
-                // set the fragment texture here
+                //传入贴图
                 encoder.setFragmentTexture(submesh.textures.baseColor, index: BaseColor.index)
+                encoder.setFragmentTexture(submesh.textures.normal, index: NormalTexture.index)
                 
                 encoder.drawIndexedPrimitives(
                     type: .triangle,

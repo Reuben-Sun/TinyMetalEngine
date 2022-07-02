@@ -21,8 +21,8 @@ struct ContentView: View {
             Picker(
                 selection: $options.renderChoice,
                 label: Text("Render Options")) {
-                    Text("Model").tag(RenderChoice.model)
-                    Text("Quad").tag(RenderChoice.quad)
+                    Text("Shadered").tag(RenderChoice.shadered)
+                    Text("DebugLight").tag(RenderChoice.debugLight)
                 }
                 .pickerStyle(SegmentedPickerStyle())
         }

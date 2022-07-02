@@ -8,9 +8,9 @@
 import Foundation
 
 enum RenderChoice {
-    case model, quad
+    case shadered, debugLight
 }
 
 class Options: ObservableObject {
-    @Published var renderChoice = RenderChoice.model
+    @Published var renderChoice = RenderChoice.shadered
 }

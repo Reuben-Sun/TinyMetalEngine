@@ -102,7 +102,9 @@ extension Renderer {
                 params: params)
         }
         
-        DebugLights.draw(lights: scene.sceneLights.lights, encoder: renderEncoder, uniforms: uniforms)
+        if options.renderChoice == .debugLight {
+            DebugLights.draw(lights: scene.sceneLights.lights, encoder: renderEncoder, uniforms: uniforms)
+        }
         
         renderEncoder.endEncoding()
         guard let drawable = view.currentDrawable else {
