@@ -11,7 +11,7 @@ import MetalKit
 struct GameScene {
     //模型
     lazy var sphere: Model = {
-        Model(device: Renderer.device, name: "cottage2.obj")
+        Model(device: Renderer.device, name: "helmet.obj")
     }()
     lazy var gizmo: Model = {
         Model(device: Renderer.device, name: "gizmo.usd")
@@ -22,7 +22,8 @@ struct GameScene {
     var sceneLights = Lights()
     
     init() {
-        camera.distance = 2.5
+        camera.distance = 3.5
+        camera.target = .zero
         camera.transform = defaultView
         models = [sphere, gizmo]
     }

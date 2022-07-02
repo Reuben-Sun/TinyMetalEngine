@@ -18,6 +18,9 @@ struct Submesh {
     struct Textures{
         let baseColor: MTLTexture?
         let normal: MTLTexture?
+        let roughness: MTLTexture?
+        let metallic: MTLTexture?
+        let ambientOcclusion: MTLTexture?
     }
 }
 
@@ -45,6 +48,9 @@ extension Submesh.Textures{
         }
         baseColor = property(with: MDLMaterialSemantic.baseColor)
         normal = property(with: .tangentSpaceNormal)
+        roughness = property(with: .roughness)
+        metallic = property(with: .metallic)
+        ambientOcclusion = property(with: .ambientOcclusion)
     }
 }
 
@@ -63,6 +69,18 @@ extension Material {
            shininess.type == .float {
             self.shininess = shininess.floatValue
         }
+        if let roughness = material?.property(with: .roughness),
+           roughness.type == .float3{
+            self.roughness = roughness.floatValue
+        }
         self.ambientOcclusion = 1
+        if let metallic = material?.property(with: .metallic),
+           metallic.type == .float3 {
+            self.metallic = metallic.floatValue
+        }
+        if let ambientOcclusion = material?.property(with: .ambientOcclusion),
+           ambientOcclusion.type == .float3 {
+            self.ambientOcclusion = ambientOcclusion.floatValue
+        }
     }
 }

@@ -29,6 +29,9 @@
 		235DEA1B2870355A006709F3 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA1A2870355A006709F3 /* cube.mtl */; };
 		235DEA1D28704C3E006709F3 /* cottage2.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA1C28704C3E006709F3 /* cottage2.obj */; };
 		235DEA1F28704C4C006709F3 /* cottage2.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA1E28704C4C006709F3 /* cottage2.mtl */; };
+		235DEA2128704E0E006709F3 /* PBRLit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA2028704E0E006709F3 /* PBRLit.metal */; };
+		235DEA2328707E37006709F3 /* helmet.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2228707E37006709F3 /* helmet.mtl */; };
+		235DEA2528707E47006709F3 /* helmet.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2428707E47006709F3 /* helmet.obj */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -71,6 +74,9 @@
 		235DEA1A2870355A006709F3 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.mtl; sourceTree = "<group>"; };
 		235DEA1C28704C3E006709F3 /* cottage2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cottage2.obj; sourceTree = "<group>"; };
 		235DEA1E28704C4C006709F3 /* cottage2.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cottage2.mtl; sourceTree = "<group>"; };
+		235DEA2028704E0E006709F3 /* PBRLit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PBRLit.metal; sourceTree = "<group>"; };
+		235DEA2228707E37006709F3 /* helmet.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helmet.mtl; sourceTree = "<group>"; };
+		235DEA2428707E47006709F3 /* helmet.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helmet.obj; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 		235DE9EF286F3115006709F3 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA2228707E37006709F3 /* helmet.mtl */,
 				235DEA1E28704C4C006709F3 /* cottage2.mtl */,
 				235DEA1A2870355A006709F3 /* cube.mtl */,
 				235DEA0E286FEEFC006709F3 /* sphere.mtl */,
@@ -234,6 +241,7 @@
 		2BF6A256286EC4200091B9D8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA2428707E47006709F3 /* helmet.obj */,
 				235DEA1C28704C3E006709F3 /* cottage2.obj */,
 				235DEA18287034F0006709F3 /* cube.obj */,
 				235DEA0A286FEEEE006709F3 /* gizmo.usd */,
@@ -269,6 +277,7 @@
 			children = (
 				2BF6A269286EC6C60091B9D8 /* Lit.metal */,
 				2BF6A26B286EC6D10091B9D8 /* DebugLights.metal */,
+				235DEA2028704E0E006709F3 /* PBRLit.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -334,7 +343,9 @@
 				235DEA1D28704C3E006709F3 /* cottage2.obj in Resources */,
 				235DEA19287034F0006709F3 /* cube.obj in Resources */,
 				2BF6A24B286EC3DD0091B9D8 /* Preview Assets.xcassets in Resources */,
+				235DEA2528707E47006709F3 /* helmet.obj in Resources */,
 				235DEA0C286FEEEE006709F3 /* gizmo.usd in Resources */,
+				235DEA2328707E37006709F3 /* helmet.mtl in Resources */,
 				235DEA1F28704C4C006709F3 /* cottage2.mtl in Resources */,
 				235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */,
 				235DE9F3286F49E0006709F3 /* plane.obj in Resources */,
@@ -358,6 +369,7 @@
 			files = (
 				235DE9FD286F5BC5006709F3 /* Camera.swift in Sources */,
 				235DEA172870244C006709F3 /* DebugLights.swift in Sources */,
+				235DEA2128704E0E006709F3 /* PBRLit.metal in Sources */,
 				235DEA09286FEDBF006709F3 /* GameController.swift in Sources */,
 				235DE9FB286F588A006709F3 /* GameScene.swift in Sources */,
 				235DEA01286F679F006709F3 /* Movement.swift in Sources */,
