@@ -19,6 +19,7 @@ struct GameScene {
     
     var models: [Model] = []
     var camera = ArcballCamera()
+    var sceneLights = Lights()
     
     init() {
         camera.distance = 2.5

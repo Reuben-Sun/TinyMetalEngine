@@ -22,6 +22,9 @@
 		235DEA0C286FEEEE006709F3 /* gizmo.usd in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA0A286FEEEE006709F3 /* gizmo.usd */; };
 		235DEA0D286FEEEE006709F3 /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA0B286FEEEE006709F3 /* sphere.obj */; };
 		235DEA0F286FEEFC006709F3 /* sphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA0E286FEEFC006709F3 /* sphere.mtl */; };
+		235DEA1128701599006709F3 /* Lights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA1028701599006709F3 /* Lights.swift */; };
+		235DEA1428701E23006709F3 /* Lighting.metal in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA1328701E23006709F3 /* Lighting.metal */; };
+		235DEA172870244C006709F3 /* DebugLights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA162870244C006709F3 /* DebugLights.swift */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -56,6 +59,10 @@
 		235DEA0A286FEEEE006709F3 /* gizmo.usd */ = {isa = PBXFileReference; lastKnownFileType = file; path = gizmo.usd; sourceTree = "<group>"; };
 		235DEA0B286FEEEE006709F3 /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
 		235DEA0E286FEEFC006709F3 /* sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.mtl; sourceTree = "<group>"; };
+		235DEA1028701599006709F3 /* Lights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lights.swift; sourceTree = "<group>"; };
+		235DEA1328701E23006709F3 /* Lighting.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lighting.metal; sourceTree = "<group>"; };
+		235DEA1528701EEE006709F3 /* Lighting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lighting.h; sourceTree = "<group>"; };
+		235DEA162870244C006709F3 /* DebugLights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLights.swift; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +121,7 @@
 				235DE9FA286F588A006709F3 /* GameScene.swift */,
 				235DE9FC286F5BC5006709F3 /* Camera.swift */,
 				235DEA02286F7736006709F3 /* PlayerCamera.swift */,
+				235DEA1028701599006709F3 /* Lights.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				2BF6A266286EC6990091B9D8 /* MathLibrary.swift */,
+				235DEA162870244C006709F3 /* DebugLights.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -195,7 +204,9 @@
 			children = (
 				2BF6A268286EC6B80091B9D8 /* Shaders */,
 				2BF6A265286EC5CF0091B9D8 /* Common.h */,
+				235DEA1528701EEE006709F3 /* Lighting.h */,
 				2BF6A286286F08860091B9D8 /* CustomCore.h */,
+				235DEA1328701E23006709F3 /* Lighting.metal */,
 			);
 			path = ShaderLibrary;
 			sourceTree = "<group>";
@@ -330,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				235DE9FD286F5BC5006709F3 /* Camera.swift in Sources */,
+				235DEA172870244C006709F3 /* DebugLights.swift in Sources */,
 				235DEA09286FEDBF006709F3 /* GameController.swift in Sources */,
 				235DE9FB286F588A006709F3 /* GameScene.swift in Sources */,
 				235DEA01286F679F006709F3 /* Movement.swift in Sources */,
@@ -338,6 +350,8 @@
 				2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */,
 				2BF6A26C286EC6D10091B9D8 /* Fragment.metal in Sources */,
 				2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */,
+				235DEA1428701E23006709F3 /* Lighting.metal in Sources */,
+				235DEA1128701599006709F3 /* Lights.swift in Sources */,
 				235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */,
 				2BF6A262286EC5880091B9D8 /* Transform.swift in Sources */,
 				2BF6A288286F0A7F0091B9D8 /* Mesh.swift in Sources */,

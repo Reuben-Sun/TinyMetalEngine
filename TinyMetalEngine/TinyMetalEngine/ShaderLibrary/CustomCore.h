@@ -16,6 +16,16 @@ struct VertexOut {
     float3 normal;
     float2 uv;
     float3 color;
+    float3 positionWS;
+    float3 normalWS;
+};
+
+struct Input {
+    
+};
+
+struct Surface {
+    
 };
 
 #endif /* CustomCore_h */

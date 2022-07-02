@@ -26,6 +26,8 @@ vertex VertexOut vertex_main(
     out.normal = in.normal;
     out.uv = in.uv;
     out.color = in.color;
+    out.positionWS = (uniforms.modelMatrix * in.position).xyz;
+    out.normalWS = uniforms.normalMatrix * in.normal;
     return out;
 }
 

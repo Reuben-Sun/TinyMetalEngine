@@ -76,12 +76,6 @@ extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
     }
     
-    func updateUniforms(scene: GameScene) {
-        uniforms.viewMatrix = scene.camera.viewMatrix
-        uniforms.projectionMatrix = scene.camera.projectionMatrix
-    }
-    
-    
     func draw(scene: GameScene, in view: MTKView) {
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
               let descriptor = view.currentRenderPassDescriptor,
@@ -91,6 +85,12 @@ extension Renderer {
         }
         
         updateUniforms(scene: scene)
+        updateParams(scene: scene)
+        
+        var lights = scene.sceneLights.lights
+        renderEncoder.setFragmentBytes(&lights,
+                                       length: MemoryLayout<Light>.stride * lights.count,
+                                       index: LightBuffer.index)
         
         renderEncoder.setDepthStencilState(depthStencilState)
         renderEncoder.setRenderPipelineState(pipelineState)
@@ -108,6 +108,15 @@ extension Renderer {
         }
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }
+    
+    func updateUniforms(scene: GameScene) {
+        uniforms.viewMatrix = scene.camera.viewMatrix
+        uniforms.projectionMatrix = scene.camera.projectionMatrix
+    }
+    
+    func updateParams(scene: GameScene) {
+        params.lightCount = UInt32(scene.sceneLights.lights.count)
     }
 }
 
