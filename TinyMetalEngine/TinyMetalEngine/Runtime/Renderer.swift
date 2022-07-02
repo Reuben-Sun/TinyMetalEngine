@@ -11,11 +11,10 @@ class Renderer: NSObject {
     static var device: MTLDevice!
     static var commandQueue: MTLCommandQueue!
     static var library: MTLLibrary!
+    var forwardRenderPass: ForwardRenderPass
     
     var options: Options
     
-    var pipelineState: MTLRenderPipelineState!
-    let depthStencilState: MTLDepthStencilState?
     
     var uniforms = Uniforms()
     var params = Params()
@@ -34,26 +33,10 @@ class Renderer: NSObject {
         // create the shader function library
         let library = device.makeDefaultLibrary()
         Self.library = library
-        let vertexFunction = library?.makeFunction(name: "vertex_main")
-        let fragmentFunction =
-        library?.makeFunction(name: "fragment_PBR")
-        
-        // create the two pipeline state objects
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.vertexFunction = vertexFunction
-        pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        do {
-            pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
-            pipelineState =
-            try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
-        } catch let error {
-            fatalError(error.localizedDescription)
-        }
-        depthStencilState = Renderer.buildDepthStencilState()
         self.options = options
+        forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
         super.init()
+        
         metalView.clearColor = MTLClearColor(
             red: 0.93,
             green: 0.97,
@@ -63,13 +46,6 @@ class Renderer: NSObject {
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
     }
     
-    /// 构建 depth stencil state
-    static func buildDepthStencilState() -> MTLDepthStencilState? {
-        let descriptor = MTLDepthStencilDescriptor()
-        descriptor.isDepthWriteEnabled = true
-        descriptor.depthCompareFunction = .less
-        return Renderer.device.makeDepthStencilState(descriptor: descriptor)
-    }
 }
 
 extension Renderer {
@@ -78,35 +54,20 @@ extension Renderer {
     
     func draw(scene: GameScene, in view: MTKView) {
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
-              let descriptor = view.currentRenderPassDescriptor,
-              let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)
-        else {
+              let descriptor = view.currentRenderPassDescriptor else {
             return
         }
         
         updateUniforms(scene: scene)
         updateParams(scene: scene)
         
-        var lights = scene.sceneLights.lights
-        renderEncoder.setFragmentBytes(&lights,
-                                       length: MemoryLayout<Light>.stride * lights.count,
-                                       index: LightBuffer.index)
+        forwardRenderPass.descriptor = descriptor
+        forwardRenderPass.draw(
+            commandBuffer: commandBuffer,
+            scene: scene,
+            uniforms: uniforms,
+            params: params)
         
-        renderEncoder.setDepthStencilState(depthStencilState)
-        renderEncoder.setRenderPipelineState(pipelineState)
-        
-        for model in scene.models {
-            model.render(
-                encoder: renderEncoder,
-                uniforms: uniforms,
-                params: params)
-        }
-        
-        if options.renderChoice == .debugLight {
-            DebugLights.draw(lights: scene.sceneLights.lights, encoder: renderEncoder, uniforms: uniforms)
-        }
-        
-        renderEncoder.endEncoding()
         guard let drawable = view.currentDrawable else {
             return
         }

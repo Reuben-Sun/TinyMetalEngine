@@ -9,12 +9,25 @@ import MetalKit
 
 /// 创建场景
 struct GameScene {
-    //模型
-    lazy var sphere: Model = {
-        Model(device: Renderer.device, name: "helmet.obj")
+    static var objectId: UInt32 = 2
+    lazy var train: Model = {
+      createModel(name: "train.obj")
     }()
+    lazy var treefir1: Model = {
+      createModel(name: "treefir.obj")
+    }()
+    lazy var treefir2: Model = {
+      createModel(name: "treefir.obj")
+    }()
+    lazy var treefir3: Model = {
+      createModel(name: "treefir.obj")
+    }()
+    lazy var ground: Model = {
+        Model(name: "large_plane.obj", objectId: 1)
+    }()
+    
     lazy var gizmo: Model = {
-        Model(device: Renderer.device, name: "gizmo.usd")
+        Model(name: "gizmo.usd", objectId: 0)
     }()
     
     var models: [Model] = []
@@ -22,11 +35,21 @@ struct GameScene {
     var sceneLights = Lights()
     
     init() {
-        camera.distance = 3.5
-        camera.target = .zero
-        camera.transform = defaultView
-        models = [sphere, gizmo]
+      camera.transform = defaultView
+      camera.target = [0, 1, 0]
+      camera.distance = 4
+      treefir1.position = [-1, 0, 2.5]
+      treefir2.position = [-3, 0, -2]
+      treefir3.position = [1.5, 0, -0.5]
+      models = [treefir1, treefir2, treefir3, train, ground, gizmo]
     }
+    
+    func createModel(name: String) -> Model {
+        let model = Model(name: name, objectId: Self.objectId)
+        Self.objectId += 1
+        return model
+    }
+
     
     /// 更新场景
     /// Swift知识：mutating是异变函数的关键词，使得不可变的结构体，通过创建新结构体赋值的方式可变
@@ -49,8 +72,8 @@ struct GameScene {
     
     var defaultView: Transform {
         Transform(
-            position: [-1.18, 1.57, -1.28],
-            rotation: [-0.73, 13.3, 0.0])
+            position: [3.2, 3.1, 1.0],
+            rotation: [-0.6, 10.7, 0.0])
     }
     
     /// 辅助线

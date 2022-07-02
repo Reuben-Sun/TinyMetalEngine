@@ -25,6 +25,9 @@ typedef struct {
     uint tiling;
     uint lightCount;
     vector_float3 cameraPosition;
+    uint objectId;
+    uint touchX;
+    uint touchY;
 } Params;
 
 typedef enum {

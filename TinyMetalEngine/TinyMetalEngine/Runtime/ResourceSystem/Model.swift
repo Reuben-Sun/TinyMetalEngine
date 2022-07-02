@@ -12,15 +12,17 @@ class Model: Transformable {
     let meshes: [Mesh]
     let name: String
     var tiling: UInt32 = 1
+    let objectId: UInt32
     
     /// 模型加载
     /// - Parameters:
     ///   - name: 模型名称（含后缀）
-    init(device: MTLDevice, name: String) {
+    init(name: String, objectId: UInt32 = 0) {
         guard let assetURL = Bundle.main.url(forResource: name, withExtension: nil) else {
             fatalError("Model: \(name) not found")
         }
-        let allocator = MTKMeshBufferAllocator(device: device)
+        self.objectId = objectId
+        let allocator = MTKMeshBufferAllocator(device: Renderer.device)
         let asset = MDLAsset(
             url: assetURL,
             vertexDescriptor: .defaultLayout,
@@ -54,6 +56,7 @@ extension Model {
         uniforms.modelMatrix = transform.modelMatrix
         uniforms.normalMatrix = uniforms.modelMatrix.upperLeft
         params.tiling = tiling
+        params.objectId = objectId
         
         encoder.setVertexBytes(
             &uniforms,

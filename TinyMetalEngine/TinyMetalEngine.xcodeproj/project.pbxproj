@@ -32,6 +32,14 @@
 		235DEA2128704E0E006709F3 /* PBRLit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA2028704E0E006709F3 /* PBRLit.metal */; };
 		235DEA2328707E37006709F3 /* helmet.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2228707E37006709F3 /* helmet.mtl */; };
 		235DEA2528707E47006709F3 /* helmet.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2428707E47006709F3 /* helmet.obj */; };
+		235DEA28287097CB006709F3 /* Pipelines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA27287097CB006709F3 /* Pipelines.swift */; };
+		235DEA2A287097EB006709F3 /* ForwardRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA29287097EB006709F3 /* ForwardRenderPass.swift */; };
+		235DEA2E287098BA006709F3 /* treefir.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2B287098BA006709F3 /* treefir.obj */; };
+		235DEA2F287098BA006709F3 /* large_plane.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2C287098BA006709F3 /* large_plane.obj */; };
+		235DEA30287098BA006709F3 /* train.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA2D287098BA006709F3 /* train.obj */; };
+		235DEA34287098E4006709F3 /* large_plane.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA31287098E4006709F3 /* large_plane.mtl */; };
+		235DEA35287098E4006709F3 /* train.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA32287098E4006709F3 /* train.mtl */; };
+		235DEA36287098E4006709F3 /* treefir.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA33287098E4006709F3 /* treefir.mtl */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -45,7 +53,6 @@
 		2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A266286EC6990091B9D8 /* MathLibrary.swift */; };
 		2BF6A26A286EC6C60091B9D8 /* Lit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A269286EC6C60091B9D8 /* Lit.metal */; };
 		2BF6A26C286EC6D10091B9D8 /* DebugLights.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A26B286EC6D10091B9D8 /* DebugLights.metal */; };
-		2BF6A270286EC7A90091B9D8 /* train.usd in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A26F286EC7A90091B9D8 /* train.usd */; };
 		2BF6A288286F0A7F0091B9D8 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A287286F0A7F0091B9D8 /* Mesh.swift */; };
 		2BF6A28A286F0A8F0091B9D8 /* Submesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A289286F0A8F0091B9D8 /* Submesh.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +84,14 @@
 		235DEA2028704E0E006709F3 /* PBRLit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PBRLit.metal; sourceTree = "<group>"; };
 		235DEA2228707E37006709F3 /* helmet.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helmet.mtl; sourceTree = "<group>"; };
 		235DEA2428707E47006709F3 /* helmet.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helmet.obj; sourceTree = "<group>"; };
+		235DEA27287097CB006709F3 /* Pipelines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipelines.swift; sourceTree = "<group>"; };
+		235DEA29287097EB006709F3 /* ForwardRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardRenderPass.swift; sourceTree = "<group>"; };
+		235DEA2B287098BA006709F3 /* treefir.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = treefir.obj; sourceTree = "<group>"; };
+		235DEA2C287098BA006709F3 /* large_plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = large_plane.obj; sourceTree = "<group>"; };
+		235DEA2D287098BA006709F3 /* train.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = train.obj; sourceTree = "<group>"; };
+		235DEA31287098E4006709F3 /* large_plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = large_plane.mtl; sourceTree = "<group>"; };
+		235DEA32287098E4006709F3 /* train.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = train.mtl; sourceTree = "<group>"; };
+		235DEA33287098E4006709F3 /* treefir.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = treefir.mtl; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,7 +108,6 @@
 		2BF6A266286EC6990091B9D8 /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		2BF6A269286EC6C60091B9D8 /* Lit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Lit.metal; sourceTree = "<group>"; };
 		2BF6A26B286EC6D10091B9D8 /* DebugLights.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DebugLights.metal; sourceTree = "<group>"; };
-		2BF6A26F286EC7A90091B9D8 /* train.usd */ = {isa = PBXFileReference; lastKnownFileType = file; path = train.usd; sourceTree = "<group>"; };
 		2BF6A286286F08860091B9D8 /* CustomCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCore.h; sourceTree = "<group>"; };
 		2BF6A287286F0A7F0091B9D8 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		2BF6A289286F0A8F0091B9D8 /* Submesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submesh.swift; sourceTree = "<group>"; };
@@ -113,10 +127,13 @@
 		235DE9EF286F3115006709F3 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
-				235DEA2228707E37006709F3 /* helmet.mtl */,
 				235DEA1E28704C4C006709F3 /* cottage2.mtl */,
 				235DEA1A2870355A006709F3 /* cube.mtl */,
 				235DEA0E286FEEFC006709F3 /* sphere.mtl */,
+				235DEA31287098E4006709F3 /* large_plane.mtl */,
+				235DEA33287098E4006709F3 /* treefir.mtl */,
+				235DEA2228707E37006709F3 /* helmet.mtl */,
+				235DEA32287098E4006709F3 /* train.mtl */,
 				235DE9F6286F49F9006709F3 /* plane.mtl */,
 				235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */,
 			);
@@ -153,6 +170,15 @@
 				235DE9F0286F3B91006709F3 /* TextureController.swift */,
 			);
 			path = ResourceSystem;
+			sourceTree = "<group>";
+		};
+		235DEA2628709784006709F3 /* RenderPasses */ = {
+			isa = PBXGroup;
+			children = (
+				235DEA27287097CB006709F3 /* Pipelines.swift */,
+				235DEA29287097EB006709F3 /* ForwardRenderPass.swift */,
+			);
+			path = RenderPasses;
 			sourceTree = "<group>";
 		};
 		2BF6A237286EC3DA0091B9D8 = {
@@ -198,6 +224,7 @@
 		2BF6A252286EC3FA0091B9D8 /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA2628709784006709F3 /* RenderPasses */,
 				235DEA07286FEB8E006709F3 /* ResourceSystem */,
 				235DEA04286FE9FF006709F3 /* Input */,
 				2BF6A25D286EC5460091B9D8 /* Renderer.swift */,
@@ -241,6 +268,9 @@
 		2BF6A256286EC4200091B9D8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA2C287098BA006709F3 /* large_plane.obj */,
+				235DEA2B287098BA006709F3 /* treefir.obj */,
+				235DEA2D287098BA006709F3 /* train.obj */,
 				235DEA2428707E47006709F3 /* helmet.obj */,
 				235DEA1C28704C3E006709F3 /* cottage2.obj */,
 				235DEA18287034F0006709F3 /* cube.obj */,
@@ -248,7 +278,6 @@
 				235DEA0B286FEEEE006709F3 /* sphere.obj */,
 				235DE9F2286F49E0006709F3 /* plane.obj */,
 				235DE9E9286F30CD006709F3 /* lowpoly-house.obj */,
-				2BF6A26F286EC7A90091B9D8 /* train.usd */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -348,15 +377,20 @@
 				235DEA2328707E37006709F3 /* helmet.mtl in Resources */,
 				235DEA1F28704C4C006709F3 /* cottage2.mtl in Resources */,
 				235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */,
+				235DEA35287098E4006709F3 /* train.mtl in Resources */,
 				235DE9F3286F49E0006709F3 /* plane.obj in Resources */,
+				235DEA2E287098BA006709F3 /* treefir.obj in Resources */,
+				235DEA2F287098BA006709F3 /* large_plane.obj in Resources */,
 				235DEA1B2870355A006709F3 /* cube.mtl in Resources */,
+				235DEA34287098E4006709F3 /* large_plane.mtl in Resources */,
 				235DEA0F286FEEFC006709F3 /* sphere.mtl in Resources */,
 				235DEA0D286FEEEE006709F3 /* sphere.obj in Resources */,
 				235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */,
+				235DEA36287098E4006709F3 /* treefir.mtl in Resources */,
 				235DE9F7286F49F9006709F3 /* plane.mtl in Resources */,
+				235DEA30287098BA006709F3 /* train.obj in Resources */,
 				235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */,
 				2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */,
-				2BF6A270286EC7A90091B9D8 /* train.usd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +402,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				235DE9FD286F5BC5006709F3 /* Camera.swift in Sources */,
+				235DEA28287097CB006709F3 /* Pipelines.swift in Sources */,
+				235DEA2A287097EB006709F3 /* ForwardRenderPass.swift in Sources */,
 				235DEA172870244C006709F3 /* DebugLights.swift in Sources */,
 				235DEA2128704E0E006709F3 /* PBRLit.metal in Sources */,
 				235DEA09286FEDBF006709F3 /* GameController.swift in Sources */,
