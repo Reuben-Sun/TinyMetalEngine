@@ -68,48 +68,16 @@ float3 phongLighting(float3 normalWS,
     
     for (uint i = 0; i < params.lightCount; i++){
         Light light = lights[i];
-        switch (light.type) {
-            case Dirtctional: {
-                float3 lightDir = normalize(-light.position);
-                float3 reflectionDir = reflect(lightDir, normalWS);
-                float3 viewDir = normalize(params.cameraPosition);
-            
-                float diffuseIntensity = saturate(-dot(lightDir, normalWS));
-                float specularIntensity = pow(saturate(dot(reflectionDir, viewDir)), materialShininess);
-                
-                diffuseColor += light.color * baseColor * diffuseIntensity;
-                specularColor += light.specularColor * materialSpecularColor * specularIntensity;
-                break;
-            }
-            case Point: {
-                float d = distance(light.position, positionWS);
-                float3 lightDir = normalize(light.position - positionWS);
-                float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * d + light.attenuation.z * d * d);
-                float diffuseIntensity = saturate(dot(lightDir, normalWS));
-                diffuseColor += light.color * baseColor * diffuseIntensity * attenuation;
-                break;
-            }
-            case Spot: {
-                float d = distance(light.position, positionWS);
-                float3 lightDir = normalize(light.position - positionWS);
-                float3 coneDir = normalize(light.coneDirection);
-                float spotResult = dot(lightDir, -coneDir);
-                if(spotResult > cos(light.coneAngle)){
-                    float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * d + light.attenuation.z * d * d);
-                    attenuation *= pow(spotResult, light.coneAttenuation);
-                    float diffuseIntensity = saturate(dot(lightDir, normalWS));
-                    diffuseColor += light.color * baseColor * diffuseIntensity * attenuation;
-                }
-                break;
-            }
-            case Ambient: {
-                ambientColor += light.color;
-                break;
-            }
-            case unused: {
-                break;
-            }
-        }
+        float attenuation = getAttenuation(light, positionWS);
+        float3 lightDir = normalize(-light.position);
+        float3 reflectionDir = reflect(lightDir, normalWS);
+        float3 viewDir = normalize(params.cameraPosition);
+    
+        float diffuseIntensity = saturate(-dot(lightDir, normalWS));
+        float specularIntensity = pow(saturate(dot(reflectionDir, viewDir)), materialShininess);
+        
+        diffuseColor += light.color * baseColor * diffuseIntensity * attenuation;
+        specularColor += light.specularColor * materialSpecularColor * specularIntensity;
     }
     return diffuseColor + specularColor + ambientColor;
 }
