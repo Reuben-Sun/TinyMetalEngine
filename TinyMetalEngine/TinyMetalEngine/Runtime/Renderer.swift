@@ -119,6 +119,7 @@ extension Renderer {
     
     func updateParams(scene: GameScene) {
         params.lightCount = UInt32(scene.sceneLights.lights.count)
+        params.cameraPosition = scene.camera.position
     }
 }
 
