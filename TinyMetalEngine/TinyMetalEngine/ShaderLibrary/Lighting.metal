@@ -9,9 +9,46 @@
 using namespace metal;
 
 #import "Lighting.h"
+#import "CustomCore.h"
 
 //着色函数库
 constant float pi = 3.1415926535897932384626433832795;
+
+//获得灯光衰减信息
+float getAttenuation(Light light, float3 positionWS){
+    float attenuation = 0;
+    
+    switch (light.type) {
+        case Dirtctional: {
+            attenuation = 1;
+            break;
+        }
+        case Point: {
+            float d = distance(light.position, positionWS);
+            attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * d + light.attenuation.z * d * d);
+            break;
+        }
+        case Spot: {
+            float d = distance(light.position, positionWS);
+            float3 lightDir = normalize(light.position - positionWS);
+            float3 coneDir = normalize(light.coneDirection);
+            float spotResult = dot(lightDir, -coneDir);
+            if(spotResult > cos(light.coneAngle)){
+                attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * d + light.attenuation.z * d * d);
+                attenuation *= pow(spotResult, light.coneAttenuation);
+            }
+            break;
+        }
+        case Ambient: {
+            attenuation = 1;
+            break;
+        }
+        case unused: {
+            break;
+        }
+    }
+    return attenuation;
+}
 
 float3 phongLighting(float3 normalWS,
                      float3 positionWS,

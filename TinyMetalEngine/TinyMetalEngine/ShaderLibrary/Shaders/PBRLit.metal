@@ -56,19 +56,25 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
     normal = normalize(normal);
     
     float3 viewDirection = normalize(params.cameraPosition);
-    Light light = lights[0];
-    float3 lightDirection = normalize(light.position);
+    
+    float3 specularColor = 0;
+    float3 diffuseColor = 0;
     float3 F0 = mix(0.04, material.baseColor, material.metallic);
-    
-    float3 specularColor = computeSpecular(normal,
-                                           viewDirection,
-                                           lightDirection,
-                                           material.roughness,
-                                           F0);
-    
-    float3 diffuseColor = computeDiffuse(material,
-                                         normal,
-                                         lightDirection);
+    for (uint i = 0; i < params.lightCount; i++) {
+        Light light = lights[i];
+        float attenuation = getAttenuation(light, in.positionWS);
+        float3 lightDirection = normalize(light.position);
+        
+        specularColor += saturate(computeSpecular(normal,
+                                 viewDirection,
+                                 lightDirection,
+                                 material.roughness,
+                                 F0));
+        
+        diffuseColor += saturate(computeDiffuse(material,
+                                normal,
+                                lightDirection) * light.color * attenuation);
+    }
     return float4(diffuseColor + specularColor, 1);
 }
 

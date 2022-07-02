@@ -10,6 +10,8 @@
 
 #import "Common.h"
 
+float getAttenuation(Light light, float3 positionWS);
+
 float3 phongLighting(float3 normalWS,
                      float3 positionWS,
                      constant Params &params,

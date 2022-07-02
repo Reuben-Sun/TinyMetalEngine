@@ -9,7 +9,7 @@ import MetalKit
 
 /// 创建场景
 struct GameScene {
-    static var objectId: UInt32 = 2
+    static var objectId: UInt32 = 1
     lazy var train: Model = {
       createModel(name: "train.obj")
     }()
@@ -23,11 +23,11 @@ struct GameScene {
       createModel(name: "treefir.obj")
     }()
     lazy var ground: Model = {
-        Model(name: "large_plane.obj", objectId: 1)
+        Model(name: "large_plane.obj", objectId: 0)
     }()
     
     lazy var gizmo: Model = {
-        Model(name: "gizmo.usd", objectId: 0)
+        createModel(name: "gizmo.usd")
     }()
     
     var models: [Model] = []
@@ -41,7 +41,7 @@ struct GameScene {
       treefir1.position = [-1, 0, 2.5]
       treefir2.position = [-3, 0, -2]
       treefir3.position = [1.5, 0, -0.5]
-      models = [treefir1, treefir2, treefir3, train, ground, gizmo]
+      models = [treefir1, treefir2, treefir3, train, ground]
     }
     
     func createModel(name: String) -> Model {

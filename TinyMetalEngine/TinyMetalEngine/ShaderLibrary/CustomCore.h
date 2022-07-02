@@ -11,6 +11,8 @@
 #include <metal_stdlib>
 using namespace metal;
 
+#import "Common.h"
+
 struct VertexOut {
     float4 position [[position]];
     float3 normal;
@@ -22,13 +24,11 @@ struct VertexOut {
     float3 bitangentWS;
 };
 
-
-struct Input {
-    
+//衰减后的灯光强度
+struct LightResult {
+    float3 diffuseLight;
+    float3 specualrLight;
 };
 
-struct Surface {
-    
-};
 
 #endif /* CustomCore_h */
