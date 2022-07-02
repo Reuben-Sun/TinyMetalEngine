@@ -40,6 +40,14 @@ extension MDLVertexDescriptor {
             offset: 0,
             bufferIndex: UVBuffer.index)
         vertexDescriptor.layouts[UVBuffer.index] = MDLVertexBufferLayout(stride: MemoryLayout<float2>.stride)
+        //color
+        vertexDescriptor.attributes[Color.index] = MDLVertexAttribute(
+            name: MDLVertexAttributeColor,
+            format: .float3,
+            offset: 0,
+            bufferIndex: ColorBuffer.index)
+        vertexDescriptor.layouts[ColorBuffer.index]
+        = MDLVertexBufferLayout(stride: MemoryLayout<float3>.stride)
         return vertexDescriptor
     }
 }

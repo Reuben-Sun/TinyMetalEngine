@@ -16,11 +16,11 @@ class Model: Transformable {
     /// 模型加载
     /// - Parameters:
     ///   - name: 模型名称（含后缀）
-    init(name: String) {
+    init(device: MTLDevice, name: String) {
         guard let assetURL = Bundle.main.url(forResource: name, withExtension: nil) else {
             fatalError("Model: \(name) not found")
           }
-        let allocator = MTKMeshBufferAllocator(device: Renderer.device)
+        let allocator = MTKMeshBufferAllocator(device: device)
         let asset = MDLAsset(
           url: assetURL,
           vertexDescriptor: .defaultLayout,

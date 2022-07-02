@@ -14,13 +14,9 @@ class Renderer: NSObject {
     
     var options: Options
     
-    var modelPipelineState: MTLRenderPipelineState!
-    var quadPipelineState: MTLRenderPipelineState!
-    var depthStencilState: MTLDepthStencilState!
+    var pipelineState: MTLRenderPipelineState!
+    let depthStencilState: MTLDepthStencilState?
     
-    lazy var scene = GameScene()
-    
-    var lastTime: Double = CFAbsoluteTimeGetCurrent()
     var uniforms = Uniforms()
     var params = Params()
     
@@ -28,8 +24,8 @@ class Renderer: NSObject {
         
         guard let device = MTLCreateSystemDefaultDevice(),
               let commandQueue = device.makeCommandQueue() else {
-            fatalError("GPU not available")
-        }
+                  fatalError("GPU not available")
+              }
         Renderer.device = device
         Renderer.commandQueue = commandQueue
         metalView.device = device
@@ -38,23 +34,19 @@ class Renderer: NSObject {
         // create the shader function library
         let library = device.makeDefaultLibrary()
         Self.library = library
-        let modelVertexFunction = library?.makeFunction(name: "vertex_main")
-        let quadVertexFunction = library?.makeFunction(name: "vertex_quad")
+        let vertexFunction = library?.makeFunction(name: "vertex_main")
         let fragmentFunction =
         library?.makeFunction(name: "fragment_main")
         
         // create the two pipeline state objects
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.vertexFunction = quadVertexFunction
+        pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
         do {
-            quadPipelineState =
-            try device.makeRenderPipelineState( descriptor: pipelineDescriptor)
-            pipelineDescriptor.vertexFunction = modelVertexFunction
             pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
-            modelPipelineState =
+            pipelineState =
             try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch let error {
             fatalError(error.localizedDescription)
@@ -67,7 +59,7 @@ class Renderer: NSObject {
             green: 1.0,
             blue: 0.9,
             alpha: 1.0)
-        metalView.delegate = self
+        metalView.depthStencilPixelFormat = .depth32Float
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
     }
     
@@ -80,45 +72,17 @@ class Renderer: NSObject {
     }
 }
 
-extension Renderer: MTKViewDelegate {
+extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        scene.update(size: size)
     }
     
-    /// 画模型
-    func renderModel(encoder: MTLRenderCommandEncoder) {
-        encoder.setRenderPipelineState(modelPipelineState)
-        
-        let currentTime = CFAbsoluteTimeGetCurrent()
-        let deltaTime = Float(currentTime - lastTime)
-        lastTime = currentTime
-        scene.update(deltaTime: deltaTime)
-        
+    func updateUniforms(scene: GameScene) {
         uniforms.viewMatrix = scene.camera.viewMatrix
         uniforms.projectionMatrix = scene.camera.projectionMatrix
-        
-        for model in scene.models {
-            model.render(encoder: encoder, uniforms: uniforms, params: params)
-        }
-    }
-    
-    /// 画平面
-    func renderQuad(encoder: MTLRenderCommandEncoder) {
-        encoder.setVertexBytes(
-          &uniforms,
-          length: MemoryLayout<Uniforms>.stride,
-          index: UniformsBuffer.index)
-
-        encoder.setFragmentBytes(
-          &params,
-          length: MemoryLayout<Uniforms>.stride,
-          index: ParamsBuffer.index)
-        encoder.setRenderPipelineState(quadPipelineState)
-        encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
     
     
-    func draw(in view: MTKView) {
+    func draw(scene: GameScene, in view: MTKView) {
         guard let commandBuffer = Renderer.commandQueue.makeCommandBuffer(),
               let descriptor = view.currentRenderPassDescriptor,
               let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor)
@@ -126,12 +90,16 @@ extension Renderer: MTKViewDelegate {
             return
         }
         
-        renderEncoder.setDepthStencilState(depthStencilState)
+        updateUniforms(scene: scene)
         
-        if options.renderChoice == .model {
-            renderModel(encoder: renderEncoder)
-        } else {
-            renderQuad(encoder: renderEncoder)
+        renderEncoder.setDepthStencilState(depthStencilState)
+        renderEncoder.setRenderPipelineState(pipelineState)
+        
+        for model in scene.models {
+            model.render(
+                encoder: renderEncoder,
+                uniforms: uniforms,
+                params: params)
         }
         
         renderEncoder.endEncoding()

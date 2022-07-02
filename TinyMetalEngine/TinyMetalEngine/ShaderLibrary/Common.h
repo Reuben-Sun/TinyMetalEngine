@@ -25,12 +25,14 @@ typedef struct {
 typedef enum {
     Position = 0,
     Normal = 1,
-    UV = 2
+    UV = 2,
+    Color = 3
 } Attributes;
 
 typedef enum {
     VertexBuffer = 0,
     UVBuffer = 1,
+    ColorBuffer = 2,
     UniformsBuffer = 11,
     ParamsBuffer = 12
 } BufferIndices;

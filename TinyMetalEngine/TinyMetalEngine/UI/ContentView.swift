@@ -16,7 +16,7 @@ struct ContentView: View {
             ZStack {
                 MetalView(options: options)
                     .border(Color.black, width: 2)
-                    .frame(width: size, height: size)
+                    .frame(width: size * 2, height: size)
             }
             Picker(
                 selection: $options.renderChoice,

@@ -19,7 +19,18 @@ class InputController {
     var mouseDelta = Point.zero
     ///记录鼠标滚轮转动
     var mouseScroll = Point.zero
-    
+    /// 记录触碰位置
+    var touchLocation: CGPoint?
+    /// 记录触碰位移
+    var touchDelta: CGSize? {
+      didSet {
+        touchDelta?.height *= -1
+        if let delta = touchDelta {
+          mouseDelta = Point(x: Float(delta.width), y: Float(delta.height))
+        }
+        leftMouseDown = touchDelta != nil
+      }
+    }
     private init() {
         let center = NotificationCenter.default
         //监听键盘

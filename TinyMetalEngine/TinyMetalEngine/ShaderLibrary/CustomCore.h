@@ -15,6 +15,7 @@ struct VertexOut {
     float4 position [[position]];
     float3 normal;
     float2 uv;
+    float3 color;
 };
 
 #endif /* CustomCore_h */

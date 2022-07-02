@@ -18,6 +18,10 @@
 		235DE9FF286F6292006709F3 /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9FE286F6292006709F3 /* InputController.swift */; };
 		235DEA01286F679F006709F3 /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA00286F679F006709F3 /* Movement.swift */; };
 		235DEA03286F7736006709F3 /* PlayerCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA02286F7736006709F3 /* PlayerCamera.swift */; };
+		235DEA09286FEDBF006709F3 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA08286FEDBF006709F3 /* GameController.swift */; };
+		235DEA0C286FEEEE006709F3 /* gizmo.usd in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA0A286FEEEE006709F3 /* gizmo.usd */; };
+		235DEA0D286FEEEE006709F3 /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA0B286FEEEE006709F3 /* sphere.obj */; };
+		235DEA0F286FEEFC006709F3 /* sphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA0E286FEEFC006709F3 /* sphere.mtl */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -48,6 +52,10 @@
 		235DE9FE286F6292006709F3 /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
 		235DEA00286F679F006709F3 /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
 		235DEA02286F7736006709F3 /* PlayerCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCamera.swift; sourceTree = "<group>"; };
+		235DEA08286FEDBF006709F3 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		235DEA0A286FEEEE006709F3 /* gizmo.usd */ = {isa = PBXFileReference; lastKnownFileType = file; path = gizmo.usd; sourceTree = "<group>"; };
+		235DEA0B286FEEEE006709F3 /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		235DEA0E286FEEFC006709F3 /* sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.mtl; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +92,7 @@
 		235DE9EF286F3115006709F3 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA0E286FEEFC006709F3 /* sphere.mtl */,
 				235DE9F6286F49F9006709F3 /* plane.mtl */,
 				235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */,
 			);
@@ -168,6 +177,7 @@
 				235DEA04286FE9FF006709F3 /* Input */,
 				2BF6A25D286EC5460091B9D8 /* Renderer.swift */,
 				2BF6A263286EC5B00091B9D8 /* VertexDescriptor.swift */,
+				235DEA08286FEDBF006709F3 /* GameController.swift */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -203,6 +213,8 @@
 		2BF6A256286EC4200091B9D8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA0A286FEEEE006709F3 /* gizmo.usd */,
+				235DEA0B286FEEEE006709F3 /* sphere.obj */,
 				235DE9F2286F49E0006709F3 /* plane.obj */,
 				235DE9E9286F30CD006709F3 /* lowpoly-house.obj */,
 				2BF6A26F286EC7A90091B9D8 /* train.usd */,
@@ -297,8 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BF6A24B286EC3DD0091B9D8 /* Preview Assets.xcassets in Resources */,
+				235DEA0C286FEEEE006709F3 /* gizmo.usd in Resources */,
 				235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */,
 				235DE9F3286F49E0006709F3 /* plane.obj in Resources */,
+				235DEA0F286FEEFC006709F3 /* sphere.mtl in Resources */,
+				235DEA0D286FEEEE006709F3 /* sphere.obj in Resources */,
 				235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */,
 				235DE9F7286F49F9006709F3 /* plane.mtl in Resources */,
 				235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */,
@@ -315,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				235DE9FD286F5BC5006709F3 /* Camera.swift in Sources */,
+				235DEA09286FEDBF006709F3 /* GameController.swift in Sources */,
 				235DE9FB286F588A006709F3 /* GameScene.swift in Sources */,
 				235DEA01286F679F006709F3 /* Movement.swift in Sources */,
 				2BF6A25C286EC5040091B9D8 /* Options.swift in Sources */,
