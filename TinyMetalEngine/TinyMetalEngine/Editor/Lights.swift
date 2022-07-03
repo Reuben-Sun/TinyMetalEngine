@@ -65,6 +65,5 @@ struct Lights {
     /// 灯光初始化
     init() {
         lights.append(sunlight)
-        lights.append(fillLight)
     }
 }

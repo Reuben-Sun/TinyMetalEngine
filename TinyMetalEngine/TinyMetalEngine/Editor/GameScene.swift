@@ -23,11 +23,15 @@ struct GameScene {
       createModel(name: "treefir.obj")
     }()
     lazy var ground: Model = {
-        Model(name: "large_plane.obj", objectId: 0)
+        Model(name: "large_plane.obj")
     }()
     
-    lazy var gizmo: Model = {
-        createModel(name: "gizmo.usd")
+//    lazy var gizmo: Model = {
+//        Model(name: "gizmo.usd")
+//    }()
+    
+    lazy var sun: Model = {
+        Model(name: "sun_sphere.obj")
     }()
     
     var models: [Model] = []
@@ -62,7 +66,8 @@ struct GameScene {
             camera.transform = defaultView
         }
         camera.update(deltaTime: deltaTime)
-        calculateGizmo()
+//        calculateGizmo()
+        sun.position = sceneLights.lights[0].position
     }
     
     
@@ -77,26 +82,26 @@ struct GameScene {
     }
     
     /// 辅助线
-    mutating func calculateGizmo() {
-        var forwardVector: float3 {
-            let lookat = float4x4(eye: camera.position, center: .zero, up: [0, 1, 0])
-            return [
-                lookat.columns.0.z, lookat.columns.1.z, lookat.columns.2.z
-            ]
-        }
-        var rightVector: float3 {
-            let lookat = float4x4(eye: camera.position, center: .zero, up: [0, 1, 0])
-            return [
-                lookat.columns.0.x, lookat.columns.1.x, lookat.columns.2.x
-            ]
-        }
-        
-        let heightNear = 2 * tan(camera.fov / 2) * camera.near
-        let widthNear = heightNear * camera.aspect
-        let cameraNear = camera.position + forwardVector * camera.near
-        let cameraUp = float3(0, 1, 0)
-        let bottomLeft = cameraNear - (cameraUp * (heightNear / 2)) - (rightVector * (widthNear / 2))
-        gizmo.position = bottomLeft
-        gizmo.position = (forwardVector - rightVector) * 10
-    }
+//    mutating func calculateGizmo() {
+//        var forwardVector: float3 {
+//            let lookat = float4x4(eye: camera.position, center: .zero, up: [0, 1, 0])
+//            return [
+//                lookat.columns.0.z, lookat.columns.1.z, lookat.columns.2.z
+//            ]
+//        }
+//        var rightVector: float3 {
+//            let lookat = float4x4(eye: camera.position, center: .zero, up: [0, 1, 0])
+//            return [
+//                lookat.columns.0.x, lookat.columns.1.x, lookat.columns.2.x
+//            ]
+//        }
+//
+//        let heightNear = 2 * tan(camera.fov / 2) * camera.near
+//        let widthNear = heightNear * camera.aspect
+//        let cameraNear = camera.position + forwardVector * camera.near
+//        let cameraUp = float3(0, 1, 0)
+//        let bottomLeft = cameraNear - (cameraUp * (heightNear / 2)) - (rightVector * (widthNear / 2))
+//        gizmo.position = bottomLeft
+//        gizmo.position = (forwardVector - rightVector) * 10
+//    }
 }

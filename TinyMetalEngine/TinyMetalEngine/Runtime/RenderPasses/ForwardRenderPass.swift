@@ -63,7 +63,12 @@ struct ForwardRenderPass: RenderPass {
         
         if options.renderChoice == .debugLight {
             DebugLights.draw(lights: scene.sceneLights.lights, encoder: renderEncoder, uniforms: uniforms)
-        }
+            var scene = scene
+            DebugModel.debugDrawModel(renderEncoder: renderEncoder,
+                                      uniforms: uniforms,
+                                      model: scene.sun,
+                                      color: [0.9, 0.8, 0.2])
+        } 
         
 
         renderEncoder.endEncoding()

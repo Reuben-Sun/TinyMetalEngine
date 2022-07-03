@@ -45,6 +45,7 @@
 		235DEA3E28714C50006709F3 /* ObjectId.metal in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA3D28714C50006709F3 /* ObjectId.metal */; };
 		235DEA4428717397006709F3 /* sun_sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA4328717397006709F3 /* sun_sphere.obj */; };
 		235DEA46287173C0006709F3 /* sun_sphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA45287173C0006709F3 /* sun_sphere.mtl */; };
+		235DEA4828717642006709F3 /* DebugModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA4728717642006709F3 /* DebugModels.swift */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -102,6 +103,7 @@
 		235DEA3D28714C50006709F3 /* ObjectId.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ObjectId.metal; sourceTree = "<group>"; };
 		235DEA4328717397006709F3 /* sun_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sun_sphere.obj; sourceTree = "<group>"; };
 		235DEA45287173C0006709F3 /* sun_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sun_sphere.mtl; sourceTree = "<group>"; };
+		235DEA4728717642006709F3 /* DebugModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugModels.swift; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				2BF6A266286EC6990091B9D8 /* MathLibrary.swift */,
 				235DEA162870244C006709F3 /* DebugLights.swift */,
+				235DEA4728717642006709F3 /* DebugModels.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */,
 				2BF6A26C286EC6D10091B9D8 /* DebugLights.metal in Sources */,
 				2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */,
+				235DEA4828717642006709F3 /* DebugModels.swift in Sources */,
 				235DEA1428701E23006709F3 /* Lighting.metal in Sources */,
 				235DEA1128701599006709F3 /* Lights.swift in Sources */,
 				235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */,
