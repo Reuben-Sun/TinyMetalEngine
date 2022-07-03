@@ -10,6 +10,8 @@ using namespace metal;
 
 #import "Sample.h"
 
+constant float shadowBias = 0.01;
+
 //阴影图集采样
 float getShadowAttenuation(float4 shadowPos, depth2d<float> shadowTexture)
 {
@@ -22,7 +24,7 @@ float getShadowAttenuation(float4 shadowPos, depth2d<float> shadowTexture)
     constexpr sampler s(coord::normalized, filter::linear, address::clamp_to_edge, compare_func::less);
     float shadow_sample = shadowTexture.sample(s, xy);
     
-    if(shadowPosition.z > shadow_sample) {
+    if(shadowPosition.z > shadow_sample + shadowBias) {
         attenuation *= 0.5;
     }
     return attenuation;
