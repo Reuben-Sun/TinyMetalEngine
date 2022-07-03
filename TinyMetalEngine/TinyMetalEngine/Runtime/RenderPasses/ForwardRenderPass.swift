@@ -15,6 +15,7 @@ struct ForwardRenderPass: RenderPass {
     let depthStencilState: MTLDepthStencilState?
     
     weak var idTexture: MTLTexture?
+    weak var shadowTexture: MTLTexture?
     
     var options: Options
     
@@ -48,7 +49,10 @@ struct ForwardRenderPass: RenderPass {
             &lights,
             length: MemoryLayout<Light>.stride * lights.count,
             index: LightBuffer.index)
+        
         renderEncoder.setFragmentTexture(idTexture, index: 11)
+        renderEncoder.setFragmentTexture(shadowTexture, index: 15)
+        
         let input = InputController.shared
         var params = params
         params.touchX = UInt32(input.touchLocation?.x ?? 0)

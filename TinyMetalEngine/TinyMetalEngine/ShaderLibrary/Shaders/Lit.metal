@@ -24,6 +24,7 @@ vertex VertexOut vertex_main(
     out.normalWS = uniforms.normalMatrix * in.normal;
     out.tangentWS = uniforms.normalMatrix * in.tangent;
     out.bitangentWS = uniforms.normalMatrix * in.bitangent;
+    out.shadowPosition = uniforms.shadowProjectionMatrix * uniforms.shadowViewMatrix * uniforms.modelMatrix * in.position;
     return out;
 }
 

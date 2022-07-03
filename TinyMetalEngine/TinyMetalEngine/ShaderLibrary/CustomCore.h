@@ -31,13 +31,7 @@ struct VertexOut {
     float3 normalWS;
     float3 tangentWS;
     float3 bitangentWS;
+    float4 shadowPosition;
 };
-
-//衰减后的灯光强度
-struct LightResult {
-    float3 diffuseLight;
-    float3 specualrLight;
-};
-
 
 #endif /* CustomCore_h */

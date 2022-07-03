@@ -13,10 +13,11 @@ class Renderer: NSObject {
     static var library: MTLLibrary!
     var forwardRenderPass: ForwardRenderPass
     var objectIdRenderPass: ObjectIdRenderPass
+    var shadowRenderPass: ShadowRenderPass
     
     var options: Options
     
-    
+    var shadowCamera = OrthographicCamera()
     var uniforms = Uniforms()
     var params = Params()
     
@@ -35,8 +36,11 @@ class Renderer: NSObject {
         let library = device.makeDefaultLibrary()
         Self.library = library
         self.options = options
+        
         forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
         objectIdRenderPass = ObjectIdRenderPass()
+        shadowRenderPass = ShadowRenderPass()
+        
         super.init()
         
         metalView.clearColor = MTLClearColor(
@@ -54,6 +58,7 @@ extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         forwardRenderPass.resize(view: view, size: size)
         objectIdRenderPass.resize(view: view, size: size)
+        shadowRenderPass.resize(view: view, size: size)
     }
     
     func draw(scene: GameScene, in view: MTKView) {
@@ -65,6 +70,7 @@ extension Renderer {
         updateUniforms(scene: scene)
         updateParams(scene: scene)
         
+        //绘制Select Mode
         if options.renderChoice == .selectItem {
             objectIdRenderPass.draw(commandBuffer: commandBuffer,
                                     scene: scene,
@@ -76,6 +82,13 @@ extension Renderer {
             forwardRenderPass.idTexture = nil
         }
         
+        //阴影投射
+        shadowRenderPass.draw(commandBuffer: commandBuffer,
+                              scene: scene,
+                              uniforms: uniforms,
+                              params: params)
+        forwardRenderPass.shadowTexture = shadowRenderPass.shadowTexture
+        //前向
         forwardRenderPass.descriptor = descriptor
         forwardRenderPass.draw(commandBuffer: commandBuffer,
                                scene: scene,
@@ -92,6 +105,13 @@ extension Renderer {
     func updateUniforms(scene: GameScene) {
         uniforms.viewMatrix = scene.camera.viewMatrix
         uniforms.projectionMatrix = scene.camera.projectionMatrix
+        
+        shadowCamera.viewSize = 16
+        shadowCamera.far = 16
+        let sun = scene.sceneLights.lights[0]
+        shadowCamera.position = sun.position
+        uniforms.shadowProjectionMatrix = shadowCamera.projectionMatrix
+        uniforms.shadowViewMatrix = float4x4(eye: sun.position, center: .zero, up: [0, 1, 0])
     }
     
     func updateParams(scene: GameScene) {

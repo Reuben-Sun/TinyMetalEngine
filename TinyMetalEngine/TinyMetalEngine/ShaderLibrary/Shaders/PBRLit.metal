@@ -9,6 +9,7 @@
 using namespace metal;
 #import "../Lighting.h"
 #import "../CustomCore.h"
+#import "../Sample.h"
 
 fragment float4 fragment_PBR(VertexOut in [[stage_in]],
                              constant Params &params [[buffer(ParamsBuffer)]],
@@ -19,7 +20,8 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
                              texture2d<float> roughnessTexture [[texture(RoughnessTexture)]],
                              texture2d<float> metallicTexture [[texture(MetallicTexture)]],
                              texture2d<float> aoTexture [[texture(AOTexture)]],
-                             texture2d<uint> idTexture [[texture(11)]])
+                             texture2d<uint> idTexture [[texture(11)]],
+                             depth2d<float> shadowTexture [[texture(15)]])
 {
     constexpr sampler textureSampler(filter::linear,
                                      address::repeat,
@@ -66,7 +68,7 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
     normal = normalize(normal);
     
     float3 viewDirection = normalize(params.cameraPosition);
-    
+    //着色
     float3 specularColor = 0;
     float3 diffuseColor = 0;
     float3 F0 = mix(0.04, material.baseColor, material.metallic);
@@ -85,6 +87,11 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
                                 normal,
                                 lightDirection) * light.color * attenuation);
     }
+    
+    //接受阴影
+    float shadow = getShadowAttenuation(in.shadowPosition, shadowTexture);
+    diffuseColor *= shadow;
+    
     return float4(diffuseColor + specularColor, 1);
 }
 

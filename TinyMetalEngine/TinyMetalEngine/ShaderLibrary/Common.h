@@ -16,6 +16,8 @@ typedef struct {
     matrix_float4x4 viewMatrix;     //V矩阵
     matrix_float4x4 projectionMatrix;   //P矩阵
     matrix_float3x3 normalMatrix;   //将法线转化为世界空间
+    matrix_float4x4 shadowProjectionMatrix;
+    matrix_float4x4 shadowViewMatrix;
 } Uniforms;
 
 //片元函数输入
