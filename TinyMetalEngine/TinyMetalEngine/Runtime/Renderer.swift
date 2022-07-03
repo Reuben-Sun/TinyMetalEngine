@@ -12,6 +12,7 @@ class Renderer: NSObject {
     static var commandQueue: MTLCommandQueue!
     static var library: MTLLibrary!
     var forwardRenderPass: ForwardRenderPass
+    var objectIdRenderPass: ObjectIdRenderPass
     
     var options: Options
     
@@ -35,6 +36,7 @@ class Renderer: NSObject {
         Self.library = library
         self.options = options
         forwardRenderPass = ForwardRenderPass(view: metalView)
+        objectIdRenderPass = ObjectIdRenderPass()
         super.init()
         
         metalView.clearColor = MTLClearColor(
@@ -50,6 +52,8 @@ class Renderer: NSObject {
 
 extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        forwardRenderPass.resize(view: view, size: size)
+        objectIdRenderPass.resize(view: view, size: size)
     }
     
     func draw(scene: GameScene, in view: MTKView) {
@@ -61,12 +65,17 @@ extension Renderer {
         updateUniforms(scene: scene)
         updateParams(scene: scene)
         
+        objectIdRenderPass.draw(commandBuffer: commandBuffer,
+                                scene: scene,
+                                uniforms: uniforms,
+                                params: params)
+        //传递深度RT
+        forwardRenderPass.idTexture = objectIdRenderPass.idTexture
         forwardRenderPass.descriptor = descriptor
-        forwardRenderPass.draw(
-            commandBuffer: commandBuffer,
-            scene: scene,
-            uniforms: uniforms,
-            params: params)
+        forwardRenderPass.draw(commandBuffer: commandBuffer,
+                               scene: scene,
+                               uniforms: uniforms,
+                               params: params)
         
         guard let drawable = view.currentDrawable else {
             return

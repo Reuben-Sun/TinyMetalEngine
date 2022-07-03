@@ -18,7 +18,8 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
                              texture2d<float> normalTexture [[texture(NormalTexture)]],
                              texture2d<float> roughnessTexture [[texture(RoughnessTexture)]],
                              texture2d<float> metallicTexture [[texture(MetallicTexture)]],
-                             texture2d<float> aoTexture [[texture(AOTexture)]])
+                             texture2d<float> aoTexture [[texture(AOTexture)]],
+                             texture2d<uint> idTexture [[texture(11)]])
 {
     constexpr sampler textureSampler(filter::linear,
                                      address::repeat,
@@ -30,6 +31,15 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
     if (!is_null_texture(baseColorTexture)) {
         material.baseColor = baseColorTexture.sample(textureSampler, in.uv * params.tiling).rgb;
     }
+    
+    if (!is_null_texture(idTexture)) {
+        uint2 coord = uint2(params.touchX * 2, params.touchY * 2);
+        uint objectID = idTexture.read(coord).r;
+        if (params.objectId != 0 && objectID == params.objectId) {
+            material.baseColor = float3(0.9, 0.5, 0);
+        }
+    }
+    
     // extract metallic
     if (!is_null_texture(metallicTexture)) {
         material.metallic = metallicTexture.sample(textureSampler, in.uv).r;
