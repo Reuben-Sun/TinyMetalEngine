@@ -7,8 +7,8 @@
 
 #include <metal_stdlib>
 using namespace metal;
-#import "../Lighting.h"
-#import "../CustomCore.h"
+#import "../ShaderLibrary/Lighting.h"
+#import "../ShaderLibrary/CustomCore.h"
 
 
 struct VertexDebugOut {

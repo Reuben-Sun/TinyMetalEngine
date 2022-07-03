@@ -20,6 +20,9 @@ float getShadowAttenuation(float4 shadowPos, depth2d<float> shadowTexture)
     float2 xy = shadowPosition.xy;
     xy = xy * 0.5 + 0.5;
     xy.y = 1 - xy.y;
+    if(xy.x < 0.0 || xy.x > 1.0 || xy.y < 0.0 || xy.y > 1.0) {
+        attenuation = 0;
+    }
     xy = saturate(xy);
     constexpr sampler s(coord::normalized, filter::linear, address::clamp_to_edge, compare_func::less);
     float shadow_sample = shadowTexture.sample(s, xy);

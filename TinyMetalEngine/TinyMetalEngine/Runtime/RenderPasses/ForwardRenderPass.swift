@@ -72,6 +72,7 @@ struct ForwardRenderPass: RenderPass {
                                       uniforms: uniforms,
                                       model: scene.sun,
                                       color: [0.9, 0.8, 0.2])
+            DebugCameraFrustum.draw(encoder: renderEncoder, scene: scene, uniforms: uniforms)
         } 
         
 
