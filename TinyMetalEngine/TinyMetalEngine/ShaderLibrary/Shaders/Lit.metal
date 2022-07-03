@@ -10,14 +10,6 @@ using namespace metal;
 #import "../Lighting.h"
 #import "../CustomCore.h"
 
-struct VertexIn {
-    float4 position [[attribute(Position)]];
-    float3 normal [[attribute(Normal)]];
-    float2 uv [[attribute(UV)]];
-    float3 color [[attribute(Color)]];
-    float3 tangent [[attribute(Tangent)]];
-    float3 bitangent [[attribute(Bitangent)]];
-};
 
 vertex VertexOut vertex_main(
                              VertexIn in [[stage_in]],
