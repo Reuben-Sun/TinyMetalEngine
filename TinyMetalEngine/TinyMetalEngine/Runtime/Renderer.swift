@@ -34,7 +34,7 @@ class Renderer: NSObject {
         let library = device.makeDefaultLibrary()
         Self.library = library
         self.options = options
-        forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
+        forwardRenderPass = ForwardRenderPass(view: metalView)
         super.init()
         
         metalView.clearColor = MTLClearColor(

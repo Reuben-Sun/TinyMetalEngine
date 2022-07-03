@@ -7,27 +7,20 @@
 
 import MetalKit
 
-struct ForwardRenderPass {
+struct ForwardRenderPass: RenderPass {
     let label = "Forward Render Pass"
     var descriptor: MTLRenderPassDescriptor?
     
     var pipelineState: MTLRenderPipelineState
     let depthStencilState: MTLDepthStencilState?
     
-    var options: Options
     
-    init(view: MTKView, options: Options) {
+    init(view: MTKView) {
         pipelineState = PipelineStates.createForwardPSO(colorPixelFormat: view.colorPixelFormat)
         depthStencilState = Self.buildDepthStencilState()
-        self.options = options
     }
     
-    static func buildDepthStencilState() -> MTLDepthStencilState? {
-        let descriptor = MTLDepthStencilDescriptor()
-        descriptor.depthCompareFunction = .less
-        descriptor.isDepthWriteEnabled = true
-        return Renderer.device.makeDepthStencilState(descriptor: descriptor)
-    }
+    
     
     mutating func resize(view: MTKView, size: CGSize) {
     }
@@ -54,15 +47,16 @@ struct ForwardRenderPass {
             length: MemoryLayout<Light>.stride * lights.count,
             index: LightBuffer.index)
         
+        let input = InputController.shared
+        var params = params
+        params.touchX = UInt32(input.touchLocation?.x ?? 0)
+        params.touchY = UInt32(input.touchLocation?.y ?? 0)
+        
         for model in scene.models {
             model.render(
                 encoder: renderEncoder,
                 uniforms: uniforms,
                 params: params)
-        }
-        
-        if options.renderChoice == .debugLight {
-            DebugLights.draw(lights: scene.sceneLights.lights, encoder: renderEncoder, uniforms: uniforms)
         }
         
         renderEncoder.endEncoding()
