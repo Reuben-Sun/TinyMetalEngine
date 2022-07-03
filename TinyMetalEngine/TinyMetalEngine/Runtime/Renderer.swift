@@ -35,7 +35,7 @@ class Renderer: NSObject {
         let library = device.makeDefaultLibrary()
         Self.library = library
         self.options = options
-        forwardRenderPass = ForwardRenderPass(view: metalView)
+        forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
         objectIdRenderPass = ObjectIdRenderPass()
         super.init()
         

@@ -43,6 +43,8 @@
 		235DEA3A2871415E006709F3 /* RenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA392871415E006709F3 /* RenderPass.swift */; };
 		235DEA3C2871466F006709F3 /* ObjectIdRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA3B2871466F006709F3 /* ObjectIdRenderPass.swift */; };
 		235DEA3E28714C50006709F3 /* ObjectId.metal in Sources */ = {isa = PBXBuildFile; fileRef = 235DEA3D28714C50006709F3 /* ObjectId.metal */; };
+		235DEA4428717397006709F3 /* sun_sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA4328717397006709F3 /* sun_sphere.obj */; };
+		235DEA46287173C0006709F3 /* sun_sphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DEA45287173C0006709F3 /* sun_sphere.mtl */; };
 		2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */; };
 		2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6A245286EC3DA0091B9D8 /* ContentView.swift */; };
 		2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BF6A247286EC3DD0091B9D8 /* Assets.xcassets */; };
@@ -98,6 +100,8 @@
 		235DEA392871415E006709F3 /* RenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPass.swift; sourceTree = "<group>"; };
 		235DEA3B2871466F006709F3 /* ObjectIdRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIdRenderPass.swift; sourceTree = "<group>"; };
 		235DEA3D28714C50006709F3 /* ObjectId.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ObjectId.metal; sourceTree = "<group>"; };
+		235DEA4328717397006709F3 /* sun_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sun_sphere.obj; sourceTree = "<group>"; };
+		235DEA45287173C0006709F3 /* sun_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sun_sphere.mtl; sourceTree = "<group>"; };
 		2BF6A240286EC3DA0091B9D8 /* TinyMetalEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyMetalEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF6A243286EC3DA0091B9D8 /* TinyMetalEngineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyMetalEngineApp.swift; sourceTree = "<group>"; };
 		2BF6A245286EC3DA0091B9D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		235DE9EF286F3115006709F3 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA45287173C0006709F3 /* sun_sphere.mtl */,
 				235DEA1E28704C4C006709F3 /* cottage2.mtl */,
 				235DEA1A2870355A006709F3 /* cube.mtl */,
 				235DEA0E286FEEFC006709F3 /* sphere.mtl */,
@@ -276,6 +281,7 @@
 		2BF6A256286EC4200091B9D8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				235DEA4328717397006709F3 /* sun_sphere.obj */,
 				235DEA2C287098BA006709F3 /* large_plane.obj */,
 				235DEA2B287098BA006709F3 /* treefir.obj */,
 				235DEA2D287098BA006709F3 /* train.obj */,
@@ -399,7 +405,9 @@
 				235DE9F7286F49F9006709F3 /* plane.mtl in Resources */,
 				235DEA30287098BA006709F3 /* train.obj in Resources */,
 				235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */,
+				235DEA46287173C0006709F3 /* sun_sphere.mtl in Resources */,
 				2BF6A248286EC3DD0091B9D8 /* Assets.xcassets in Resources */,
+				235DEA4428717397006709F3 /* sun_sphere.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

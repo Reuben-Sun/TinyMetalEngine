@@ -16,9 +16,12 @@ struct ForwardRenderPass: RenderPass {
     
     weak var idTexture: MTLTexture?
     
-    init(view: MTKView) {
+    var options: Options
+    
+    init(view: MTKView, options: Options) {
         pipelineState = PipelineStates.createForwardPSO(colorPixelFormat: view.colorPixelFormat)
         depthStencilState = Self.buildDepthStencilState()
+        self.options = options
     }
     
     
@@ -58,6 +61,11 @@ struct ForwardRenderPass: RenderPass {
                 params: params)
         }
         
+        if options.renderChoice == .debugLight {
+            DebugLights.draw(lights: scene.sceneLights.lights, encoder: renderEncoder, uniforms: uniforms)
+        }
+        
+
         renderEncoder.endEncoding()
     }
 }
