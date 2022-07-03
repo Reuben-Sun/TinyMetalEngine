@@ -8,7 +8,7 @@
 import Foundation
 
 enum RenderChoice {
-    case shadered, debugLight
+    case shadered, debugLight, selectItem
 }
 
 class Options: ObservableObject {

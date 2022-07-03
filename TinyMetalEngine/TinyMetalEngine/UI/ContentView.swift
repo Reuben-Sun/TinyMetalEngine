@@ -23,6 +23,7 @@ struct ContentView: View {
                 label: Text("Render Options")) {
                     Text("Shadered").tag(RenderChoice.shadered)
                     Text("DebugLight").tag(RenderChoice.debugLight)
+                    Text("Select Item").tag(RenderChoice.selectItem)
                 }
                 .pickerStyle(SegmentedPickerStyle())
         }

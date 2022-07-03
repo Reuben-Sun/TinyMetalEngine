@@ -65,12 +65,17 @@ extension Renderer {
         updateUniforms(scene: scene)
         updateParams(scene: scene)
         
-        objectIdRenderPass.draw(commandBuffer: commandBuffer,
-                                scene: scene,
-                                uniforms: uniforms,
-                                params: params)
-        //传递深度RT
-        forwardRenderPass.idTexture = objectIdRenderPass.idTexture
+        if options.renderChoice == .selectItem {
+            objectIdRenderPass.draw(commandBuffer: commandBuffer,
+                                    scene: scene,
+                                    uniforms: uniforms,
+                                    params: params)
+            //传递深度RT
+            forwardRenderPass.idTexture = objectIdRenderPass.idTexture
+        } else {
+            forwardRenderPass.idTexture = nil
+        }
+        
         forwardRenderPass.descriptor = descriptor
         forwardRenderPass.draw(commandBuffer: commandBuffer,
                                scene: scene,
