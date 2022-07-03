@@ -23,49 +23,10 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
                              texture2d<uint> idTexture [[texture(11)]],
                              depth2d<float> shadowTexture [[texture(15)]])
 {
-    constexpr sampler textureSampler(filter::linear,
-                                     address::repeat,
-                                     mip_filter::linear);
-    
-    Material material = _material;
-    
-    // extract color
-    if (!is_null_texture(baseColorTexture)) {
-        material.baseColor = baseColorTexture.sample(textureSampler, in.uv * params.tiling).rgb;
-    }
-    
-    if (!is_null_texture(idTexture)) {
-        uint2 coord = uint2(params.touchX * 2, params.touchY * 2);
-        uint objectID = idTexture.read(coord).r;
-        if (params.objectId != 0 && objectID == params.objectId) {
-            material.baseColor = float3(0.9, 0.5, 0);
-        }
-    }
-    
-    // extract metallic
-    if (!is_null_texture(metallicTexture)) {
-        material.metallic = metallicTexture.sample(textureSampler, in.uv).r;
-    }
-    // extract roughness
-    if (!is_null_texture(roughnessTexture)) {
-        material.roughness = roughnessTexture.sample(textureSampler, in.uv).r;
-    }
-    // extract ambient occlusion
-    if (!is_null_texture(aoTexture)) {
-        material.ambientOcclusion = aoTexture.sample(textureSampler, in.uv).r;
-    }
+    Material material = sampleTexture(_material, baseColorTexture, roughnessTexture, metallicTexture, aoTexture, idTexture, in.uv, params);
     
     // normal map
-    float3 normal;
-    if (is_null_texture(normalTexture)) {
-        normal = in.normalWS;
-    } else {
-        float3 normalValue = normalTexture.sample(textureSampler, in.uv * params.tiling).xyz * 2.0 - 1.0;
-        normal = float3x3(in.tangentWS,
-                          in.bitangentWS,
-                          in.normalWS) * normalValue;
-    }
-    normal = normalize(normal);
+    float3 normal = getNormal(normalTexture, in.uv, in.normalWS, in.tangentWS, in.bitangentWS, params);
     
     float3 viewDirection = normalize(params.cameraPosition);
     //着色
