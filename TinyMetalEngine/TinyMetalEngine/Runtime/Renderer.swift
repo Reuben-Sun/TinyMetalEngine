@@ -12,6 +12,7 @@ class Renderer: NSObject {
     static var commandQueue: MTLCommandQueue!
     static var library: MTLLibrary!
     var forwardRenderPass: ForwardRenderPass
+    var gBufferRenderPass: GBufferRenderPass
     var objectIdRenderPass: ObjectIdRenderPass
     var shadowRenderPass: ShadowRenderPass
     
@@ -38,6 +39,7 @@ class Renderer: NSObject {
         self.options = options
         
         forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
+        gBufferRenderPass = GBufferRenderPass(view: metalView)
         objectIdRenderPass = ObjectIdRenderPass()
         shadowRenderPass = ShadowRenderPass()
         
@@ -87,13 +89,24 @@ extension Renderer {
                               scene: scene,
                               uniforms: uniforms,
                               params: params)
-        forwardRenderPass.shadowTexture = shadowRenderPass.shadowTexture
-        //前向
-        forwardRenderPass.descriptor = descriptor
-        forwardRenderPass.draw(commandBuffer: commandBuffer,
-                               scene: scene,
-                               uniforms: uniforms,
-                               params: params)
+        
+        if options.renderPath == .deferred {
+            gBufferRenderPass.descriptor = descriptor
+            gBufferRenderPass.shadowTexture = shadowRenderPass.shadowTexture
+            gBufferRenderPass.draw(
+                commandBuffer: commandBuffer,
+                scene: scene,
+                uniforms: uniforms,
+                params: params)
+        } else {
+            forwardRenderPass.descriptor = descriptor
+            forwardRenderPass.shadowTexture = shadowRenderPass.shadowTexture
+            forwardRenderPass.draw(
+                commandBuffer: commandBuffer,
+                scene: scene,
+                uniforms: uniforms,
+                params: params)
+        }
         
         guard let drawable = view.currentDrawable else {
             return

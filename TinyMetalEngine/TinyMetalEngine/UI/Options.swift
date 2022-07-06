@@ -11,6 +11,11 @@ enum RenderChoice {
     case shadered, debugLight, selectItem
 }
 
+enum RenderPath {
+    case forward, deferred
+}
+
 class Options: ObservableObject {
     @Published var renderChoice = RenderChoice.shadered
+    @Published var renderPath = RenderPath.forward
 }

@@ -9,10 +9,9 @@
 using namespace metal;
 #import "../Lighting.h"
 #import "../CustomCore.h"
+#import "../Sample.h"
 
-
-vertex VertexOut vertex_main(
-                             VertexIn in [[stage_in]],
+vertex VertexOut vertex_main(VertexIn in [[stage_in]],
                              constant Uniforms &uniforms [[buffer(11)]])
 {
     VertexOut out;
@@ -28,12 +27,13 @@ vertex VertexOut vertex_main(
     return out;
 }
 
-fragment float4 fragment_main(constant Params &params [[buffer(12)]],
+fragment float4 fragment_main(constant Params &params [[buffer(ParamsBuffer)]],
                               VertexOut in [[stage_in]],
                               texture2d<float> baseColorTexture [[texture(BaseColor)]],
                               texture2d<float> normalTexture [[texture(NormalTexture)]],
                               constant Material &_material [[buffer(MaterialBuffer)]],
-                              constant Light *lights [[buffer(LightBuffer)]])
+                              constant Light *lights [[buffer(LightBuffer)]],
+                              depth2d<float> shadowTexture [[texture(ShadowTexture)]])
 {
     Material mat = _material;
     
@@ -54,6 +54,8 @@ fragment float4 fragment_main(constant Params &params [[buffer(12)]],
     }
     
     float3 color = phongLighting(normalWS, in.positionWS, params, lights, mat);
+    float shadow = getShadowAttenuation(in.shadowPosition, shadowTexture);
+    color *= shadow;
     return float4(color, 1);
 }
 

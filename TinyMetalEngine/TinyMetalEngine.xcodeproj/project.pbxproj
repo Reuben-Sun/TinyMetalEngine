@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2313B1282875CC0E008537EB /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2313B1272875CC0E008537EB /* RadioButton.swift */; };
+		2313B12A2875CE8B008537EB /* GBufferRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2313B1292875CE8B008537EB /* GBufferRenderPass.swift */; };
 		235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9E9286F30CD006709F3 /* lowpoly-house.obj */; };
 		235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */; };
 		235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9F0286F3B91006709F3 /* TextureController.swift */; };
@@ -70,6 +72,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2313B1272875CC0E008537EB /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		2313B1292875CE8B008537EB /* GBufferRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferRenderPass.swift; sourceTree = "<group>"; };
 		235DE9E9286F30CD006709F3 /* lowpoly-house.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.obj"; sourceTree = "<group>"; };
 		235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.mtl"; sourceTree = "<group>"; };
 		235DE9F0286F3B91006709F3 /* TextureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureController.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				235DEA392871415E006709F3 /* RenderPass.swift */,
 				235DEA3B2871466F006709F3 /* ObjectIdRenderPass.swift */,
 				235DEA4928717F73006709F3 /* ShadowRenderPass.swift */,
+				2313B1292875CE8B008537EB /* GBufferRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				2BF6A245286EC3DA0091B9D8 /* ContentView.swift */,
 				2BF6A259286EC4D40091B9D8 /* MetalView.swift */,
 				2BF6A25B286EC5040091B9D8 /* Options.swift */,
+				2313B1272875CC0E008537EB /* RadioButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				2BF6A25A286EC4D40091B9D8 /* MetalView.swift in Sources */,
 				2BF6A267286EC6990091B9D8 /* MathLibrary.swift in Sources */,
 				2BF6A26C286EC6D10091B9D8 /* DebugLights.metal in Sources */,
+				2313B12A2875CE8B008537EB /* GBufferRenderPass.swift in Sources */,
 				2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */,
 				235DEA4828717642006709F3 /* DebugModels.swift in Sources */,
 				235DEA1428701E23006709F3 /* Lighting.metal in Sources */,
@@ -474,6 +481,7 @@
 				235DEA3E28714C50006709F3 /* ObjectId.metal in Sources */,
 				2BF6A264286EC5B00091B9D8 /* VertexDescriptor.swift in Sources */,
 				2BF6A244286EC3DA0091B9D8 /* TinyMetalEngineApp.swift in Sources */,
+				2313B1282875CC0E008537EB /* RadioButton.swift in Sources */,
 				2BF6A28A286F0A8F0091B9D8 /* Submesh.swift in Sources */,
 				235DEA3C2871466F006709F3 /* ObjectIdRenderPass.swift in Sources */,
 				235DEA03286F7736006709F3 /* PlayerCamera.swift in Sources */,

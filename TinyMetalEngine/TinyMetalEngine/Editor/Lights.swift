@@ -96,7 +96,7 @@ struct Lights {
         let z = Float.random(in: min.z...max.z)
         light.position = [x, y, z]
         light.color = colors[Int.random(in: 0..<colors.count)]
-        light.attenuation = [0.2, 10, 50]
+        light.attenuation = [0.5, 2, 1]
         lights.append(light)
       }
       return lights

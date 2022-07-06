@@ -44,12 +44,7 @@ struct ForwardRenderPass: RenderPass {
         renderEncoder.setDepthStencilState(depthStencilState)
         renderEncoder.setRenderPipelineState(pipelineState)
         
-        var lights = scene.sceneLights.lights
-        renderEncoder.setFragmentBytes(
-            &lights,
-            length: MemoryLayout<Light>.stride * lights.count,
-            index: LightBuffer.index)
-        
+        renderEncoder.setFragmentBuffer(scene.sceneLights.lightsBuffer, offset: 0, index: LightBuffer.index)
         renderEncoder.setFragmentTexture(idTexture, index: IdBuffer.index)
         renderEncoder.setFragmentTexture(shadowTexture, index: ShadowTexture.index)
         

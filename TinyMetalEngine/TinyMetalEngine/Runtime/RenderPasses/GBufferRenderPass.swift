@@ -16,22 +16,26 @@ struct GBufferRenderPass: RenderPass {
     weak var shadowTexture: MTLTexture?
     
     init(view: MTKView) {
-        pipelineState = PipelineStates.createGBufferPSO(colorPixelFormat: view.colorPixelFormat)
+        pipelineState = PipelineStates.createGBufferPSO(
+            colorPixelFormat: view.colorPixelFormat)
         depthStencilState = Self.buildDepthStencilState()
     }
     
     mutating func resize(view: MTKView, size: CGSize) {
     }
     
-    func draw(commandBuffer: MTLCommandBuffer,
-              scene: GameScene,
-              uniforms: Uniforms,
-              params: Params
+    func draw(
+        commandBuffer: MTLCommandBuffer,
+        scene: GameScene,
+        uniforms: Uniforms,
+        params: Params
     ) {
         guard let descriptor = descriptor,
-              let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: descriptor) else {
-                  return
-              }
+              let renderEncoder =
+                commandBuffer.makeRenderCommandEncoder(
+                    descriptor: descriptor) else {
+                        return
+                    }
         renderEncoder.label = label
         renderEncoder.setDepthStencilState(depthStencilState)
         renderEncoder.setRenderPipelineState(pipelineState)
