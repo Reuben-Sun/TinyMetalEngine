@@ -28,4 +28,9 @@ float3 computeSpecular(float3 normal,
                        float3 lightDirection,
                        float roughness,
                        float3 F0);
+
+float3 calculatePoint(Light light,
+                      float3 position,
+                      float3 normal,
+                      Material material);
 #endif /* Lighting_h */

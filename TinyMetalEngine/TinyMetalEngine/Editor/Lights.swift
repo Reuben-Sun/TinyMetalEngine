@@ -96,7 +96,7 @@ struct Lights {
         let z = Float.random(in: min.z...max.z)
         light.position = [x, y, z]
         light.color = colors[Int.random(in: 0..<colors.count)]
-        light.attenuation = [0.5, 2, 1]
+        light.attenuation = [0.2, 10, 50]
         lights.append(light)
       }
       return lights
@@ -116,9 +116,9 @@ struct Lights {
         dirBuffer = Self.createBuffer(lights: dirLights)
         lights = dirLights
         pointLights = Self.createPointLights(
-          count: 20,
-          min: [-3, 0.1, -3],
-          max: [3, 0.3, 3])
+          count: 200,
+          min: [-6, 0.1, -6],
+          max: [6, 0.3, 6])
         pointBuffer = Self.createBuffer(lights: pointLights)
         lights += pointLights
         lightsBuffer = Self.createBuffer(lights: lights)

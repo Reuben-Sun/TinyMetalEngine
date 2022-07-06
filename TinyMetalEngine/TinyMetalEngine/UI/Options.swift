@@ -17,5 +17,5 @@ enum RenderPath {
 
 class Options: ObservableObject {
     @Published var renderChoice = RenderChoice.shadered
-    @Published var renderPath = RenderPath.forward
+    @Published var renderPath = RenderPath.deferred
 }

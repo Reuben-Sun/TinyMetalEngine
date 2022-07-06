@@ -11,7 +11,7 @@ struct LightingRenderPass: RenderPass {
     let label = "Lighting Render Pass"
     var descriptor: MTLRenderPassDescriptor?
     var sunLightPSO: MTLRenderPipelineState
-//    var pointLightPSO: MTLRenderPipelineState
+    var pointLightPSO: MTLRenderPipelineState
     let depthStencilState: MTLDepthStencilState?
     weak var albedoTexture: MTLTexture?
     weak var normalTexture: MTLTexture?
@@ -22,8 +22,14 @@ struct LightingRenderPass: RenderPass {
     
     init(view: MTKView){
         sunLightPSO = PipelineStates.createSunLightPSO(colorPixelFormat: view.colorPixelFormat)
-//        pointLightPSO = PipelineStates.createPointLightPSO(colorPixelFormat: view.colorPixelFormat)
+        pointLightPSO = PipelineStates.createPointLightPSO(colorPixelFormat: view.colorPixelFormat)
         depthStencilState = Self.buildDepthStencilState()
+    }
+    
+    static func buildDepthStencilState() -> MTLDepthStencilState? {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.isDepthWriteEnabled = false
+        return Renderer.device.makeDepthStencilState(descriptor: descriptor)
     }
     
     func draw(commandBuffer: MTLCommandBuffer,
@@ -55,10 +61,10 @@ struct LightingRenderPass: RenderPass {
             renderEncoder: renderEncoder,
             scene: scene,
             params: params)
-//        drawPointLight(
-//            renderEncoder: renderEncoder,
-//            scene: scene,
-//            params: params)
+        drawPointLight(
+            renderEncoder: renderEncoder,
+            scene: scene,
+            params: params)
         renderEncoder.endEncoding()
     }
     
@@ -86,36 +92,36 @@ struct LightingRenderPass: RenderPass {
         renderEncoder.popDebugGroup()
     }
     
-//    func drawPointLight(
-//        renderEncoder: MTLRenderCommandEncoder,
-//        scene: GameScene,
-//        params: Params
-//    ) {
-//        renderEncoder.pushDebugGroup("Point lights")
-//        renderEncoder.setRenderPipelineState(pointLightPSO)
-//        renderEncoder.setVertexBuffer(
-//            scene.sceneLights.pointBuffer,
-//            offset: 0,
-//            index: LightBuffer.index)
-//        renderEncoder.setFragmentBuffer(
-//            scene.sceneLights.pointBuffer,
-//            offset: 0,
-//            index: LightBuffer.index)
-//        guard let mesh = icosphere.meshes.first,
-//              let submesh = mesh.submeshes.first else { return }
-//        for (index, vertexBuffer) in mesh.vertexBuffers.enumerated() {
-//            renderEncoder.setVertexBuffer(
-//                vertexBuffer,
-//                offset: 0,
-//                index: index)
-//        }
-//        renderEncoder.drawIndexedPrimitives(
-//            type: .triangle,
-//            indexCount: submesh.indexCount,
-//            indexType: submesh.indexType,
-//            indexBuffer: submesh.indexBuffer,
-//            indexBufferOffset: submesh.indexBufferOffset,
-//            instanceCount: scene.sceneLights.pointLights.count)
-//        renderEncoder.popDebugGroup()
-//    }
+    func drawPointLight(
+        renderEncoder: MTLRenderCommandEncoder,
+        scene: GameScene,
+        params: Params
+    ) {
+        renderEncoder.pushDebugGroup("Point lights")
+        renderEncoder.setRenderPipelineState(pointLightPSO)
+        renderEncoder.setVertexBuffer(
+            scene.sceneLights.pointBuffer,
+            offset: 0,
+            index: LightBuffer.index)
+        renderEncoder.setFragmentBuffer(
+            scene.sceneLights.pointBuffer,
+            offset: 0,
+            index: LightBuffer.index)
+        guard let mesh = icosphere.meshes.first,
+              let submesh = mesh.submeshes.first else { return }
+        for (index, vertexBuffer) in mesh.vertexBuffers.enumerated() {
+            renderEncoder.setVertexBuffer(
+                vertexBuffer,
+                offset: 0,
+                index: index)
+        }
+        renderEncoder.drawIndexedPrimitives(
+            type: .triangle,
+            indexCount: submesh.indexCount,
+            indexType: submesh.indexType,
+            indexBuffer: submesh.indexBuffer,
+            indexBufferOffset: submesh.indexBufferOffset,
+            instanceCount: scene.sceneLights.pointLights.count)
+        renderEncoder.popDebugGroup()
+    }
 }

@@ -82,28 +82,28 @@ enum PipelineStates {
         return createPSO(descriptor: pipelineDescriptor)
     }
     
-//    static func createPointLightPSO(colorPixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
-//        let vertexFunction = Renderer.library?.makeFunction(name: "vertex_pointLight")
-//        let fragmentFunction = Renderer.library?.makeFunction(name: "fragment_pointLight")
-//        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-//        pipelineDescriptor.vertexFunction = vertexFunction
-//        pipelineDescriptor.fragmentFunction = fragmentFunction
-//        pipelineDescriptor.colorAttachments[0].pixelFormat = colorPixelFormat
-//        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-//        pipelineDescriptor.vertexDescriptor =
-//        MTLVertexDescriptor.defaultLayout
-//        let attachment = pipelineDescriptor.colorAttachments[0]
-//        attachment?.isBlendingEnabled = true
-//        attachment?.rgbBlendOperation = .add
-//        attachment?.alphaBlendOperation = .add
-//        attachment?.sourceRGBBlendFactor = .one
-//        attachment?.sourceAlphaBlendFactor = .one
-//        attachment?.destinationRGBBlendFactor = .one
-//        attachment?.destinationAlphaBlendFactor = .zero
-//        attachment?.sourceRGBBlendFactor = .one
-//        attachment?.sourceAlphaBlendFactor = .one
-//        return createPSO(descriptor: pipelineDescriptor)
-//    }
+    static func createPointLightPSO(colorPixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
+        let vertexFunction = Renderer.library?.makeFunction(name: "vertex_pointLight")
+        let fragmentFunction = Renderer.library?.makeFunction(name: "fragment_pointLight")
+        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.fragmentFunction = fragmentFunction
+        pipelineDescriptor.colorAttachments[0].pixelFormat = colorPixelFormat
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
+        pipelineDescriptor.vertexDescriptor =
+        MTLVertexDescriptor.defaultLayout
+        let attachment = pipelineDescriptor.colorAttachments[0]
+        attachment?.isBlendingEnabled = true
+        attachment?.rgbBlendOperation = .add
+        attachment?.alphaBlendOperation = .add
+        attachment?.sourceRGBBlendFactor = .one
+        attachment?.sourceAlphaBlendFactor = .one
+        attachment?.destinationRGBBlendFactor = .one
+        attachment?.destinationAlphaBlendFactor = .zero
+        attachment?.sourceRGBBlendFactor = .one
+        attachment?.sourceAlphaBlendFactor = .one
+        return createPSO(descriptor: pipelineDescriptor)
+    }
 }
 
 extension MTLRenderPipelineDescriptor {

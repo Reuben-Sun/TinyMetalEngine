@@ -64,7 +64,7 @@ float3 phongLighting(float3 normalWS,
     float materialShininess = material.shininess;
     float3 materialSpecularColor = material.specularColor;
     
-
+    
     
     for (uint i = 0; i < params.lightCount; i++){
         Light light = lights[i];
@@ -72,7 +72,7 @@ float3 phongLighting(float3 normalWS,
         float3 lightDir = normalize(-light.position);
         float3 reflectionDir = reflect(lightDir, normalWS);
         float3 viewDir = normalize(params.cameraPosition);
-    
+        
         float diffuseIntensity = saturate(-dot(lightDir, normalWS));
         float specularIntensity = pow(saturate(dot(reflectionDir, viewDir)), materialShininess);
         
@@ -133,5 +133,21 @@ float3 computeSpecular(float3 normal,
     return specular;
 }
 
+float3 calculatePoint(Light light,
+                      float3 position,
+                      float3 normal,
+                      Material material)
+{
+    float d = distance(light.position, position);
+    float3 lightDirection = normalize(light.position - position);
+    float attenuation = 1.0 / (light.attenuation.x +
+                               light.attenuation.y * d + light.attenuation.z * d * d);
+    
+    float diffuseIntensity =
+    saturate(dot(lightDirection, normal));
+    float3 color = light.color * material.baseColor * diffuseIntensity;
+    color *= attenuation;
+    return color;
+}
 
 
