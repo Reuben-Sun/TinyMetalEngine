@@ -27,8 +27,8 @@ struct ContentView: View {
             .pickerStyle(SegmentedPickerStyle())
             RadioButton(
               label: "Rendering:",
-              options: ["Deferred", "Forward"]) { checked in
-                options.renderPath = checked == 0 ? .deferred : .forward
+              options: [ "Forward", "Deferred"]) { checked in
+                  options.renderPath = checked == 0 ?  .forward : .deferred
             }
         }
         .padding()
