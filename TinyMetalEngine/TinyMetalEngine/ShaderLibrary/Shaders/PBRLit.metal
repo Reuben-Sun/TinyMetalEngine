@@ -20,8 +20,8 @@ fragment float4 fragment_PBR(VertexOut in [[stage_in]],
                              texture2d<float> roughnessTexture [[texture(RoughnessTexture)]],
                              texture2d<float> metallicTexture [[texture(MetallicTexture)]],
                              texture2d<float> aoTexture [[texture(AOTexture)]],
-                             texture2d<uint> idTexture [[texture(11)]],
-                             depth2d<float> shadowTexture [[texture(15)]])
+                             texture2d<uint> idTexture [[texture(IdBuffer)]],
+                             depth2d<float> shadowTexture [[texture(ShadowTexture)]])
 {
     Material material = sampleTexture(_material, baseColorTexture, roughnessTexture, metallicTexture, aoTexture, idTexture, in.uv, params);
     

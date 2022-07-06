@@ -50,8 +50,8 @@ struct ForwardRenderPass: RenderPass {
             length: MemoryLayout<Light>.stride * lights.count,
             index: LightBuffer.index)
         
-        renderEncoder.setFragmentTexture(idTexture, index: 11)
-        renderEncoder.setFragmentTexture(shadowTexture, index: 15)
+        renderEncoder.setFragmentTexture(idTexture, index: IdBuffer.index)
+        renderEncoder.setFragmentTexture(shadowTexture, index: ShadowTexture.index)
         
         let input = InputController.shared
         var params = params

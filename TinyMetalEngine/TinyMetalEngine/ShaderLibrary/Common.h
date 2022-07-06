@@ -50,7 +50,8 @@ typedef enum {
     UniformsBuffer = 11,
     ParamsBuffer = 12,
     LightBuffer = 13,
-    MaterialBuffer = 14
+    MaterialBuffer = 14,
+    IdBuffer = 15
 } BufferIndices;
 
 typedef enum {
@@ -58,7 +59,8 @@ typedef enum {
     NormalTexture = 1,
     RoughnessTexture = 2,
     MetallicTexture = 3,
-    AOTexture = 4
+    AOTexture = 4,
+    ShadowTexture = 5
 } TextureIndices;
 
 //灯光种类
