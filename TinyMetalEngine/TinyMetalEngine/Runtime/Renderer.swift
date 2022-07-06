@@ -109,9 +109,9 @@ extension Renderer {
         shadowCamera.viewSize = 16
         shadowCamera.far = 16
         let sun = scene.sceneLights.lights[0]
-        shadowCamera.position = sun.position
+        shadowCamera = OrthographicCamera.createShadowCamera(using: scene.camera, lightPosition: sun.position)
         uniforms.shadowProjectionMatrix = shadowCamera.projectionMatrix
-        uniforms.shadowViewMatrix = float4x4(eye: sun.position, center: .zero, up: [0, 1, 0])
+        uniforms.shadowViewMatrix = float4x4(eye: shadowCamera.position, center: shadowCamera.center, up: [0, 1, 0])
     }
     
     func updateParams(scene: GameScene) {
