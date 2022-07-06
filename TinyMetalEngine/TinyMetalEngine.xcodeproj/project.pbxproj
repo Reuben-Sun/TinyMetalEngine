@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2313B1282875CC0E008537EB /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2313B1272875CC0E008537EB /* RadioButton.swift */; };
 		2313B12A2875CE8B008537EB /* GBufferRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2313B1292875CE8B008537EB /* GBufferRenderPass.swift */; };
+		2313B12C2875DE87008537EB /* Deferred.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2313B12B2875DE87008537EB /* Deferred.metal */; };
+		2313B12E2875E305008537EB /* LightingRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2313B12D2875E305008537EB /* LightingRenderPass.swift */; };
+		2313B1302875E5FC008537EB /* icosphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2313B12F2875E5FC008537EB /* icosphere.obj */; };
+		2313B1322875E607008537EB /* icosphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 2313B1312875E607008537EB /* icosphere.mtl */; };
 		235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9E9286F30CD006709F3 /* lowpoly-house.obj */; };
 		235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */; };
 		235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9F0286F3B91006709F3 /* TextureController.swift */; };
@@ -74,6 +78,10 @@
 /* Begin PBXFileReference section */
 		2313B1272875CC0E008537EB /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		2313B1292875CE8B008537EB /* GBufferRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferRenderPass.swift; sourceTree = "<group>"; };
+		2313B12B2875DE87008537EB /* Deferred.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Deferred.metal; sourceTree = "<group>"; };
+		2313B12D2875E305008537EB /* LightingRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderPass.swift; sourceTree = "<group>"; };
+		2313B12F2875E5FC008537EB /* icosphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.obj; sourceTree = "<group>"; };
+		2313B1312875E607008537EB /* icosphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.mtl; sourceTree = "<group>"; };
 		235DE9E9286F30CD006709F3 /* lowpoly-house.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.obj"; sourceTree = "<group>"; };
 		235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.mtl"; sourceTree = "<group>"; };
 		235DE9F0286F3B91006709F3 /* TextureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureController.swift; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 		235DE9EF286F3115006709F3 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				2313B1312875E607008537EB /* icosphere.mtl */,
 				235DEA45287173C0006709F3 /* sun_sphere.mtl */,
 				235DEA1E28704C4C006709F3 /* cottage2.mtl */,
 				235DEA1A2870355A006709F3 /* cube.mtl */,
@@ -212,6 +221,7 @@
 				235DEA3B2871466F006709F3 /* ObjectIdRenderPass.swift */,
 				235DEA4928717F73006709F3 /* ShadowRenderPass.swift */,
 				2313B1292875CE8B008537EB /* GBufferRenderPass.swift */,
+				2313B12D2875E305008537EB /* LightingRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -309,6 +319,7 @@
 		2BF6A256286EC4200091B9D8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2313B12F2875E5FC008537EB /* icosphere.obj */,
 				235DEA4328717397006709F3 /* sun_sphere.obj */,
 				235DEA2C287098BA006709F3 /* large_plane.obj */,
 				235DEA2B287098BA006709F3 /* treefir.obj */,
@@ -351,6 +362,7 @@
 				2BF6A269286EC6C60091B9D8 /* Lit.metal */,
 				235DEA2028704E0E006709F3 /* PBRLit.metal */,
 				235DEA3D28714C50006709F3 /* ObjectId.metal */,
+				2313B12B2875DE87008537EB /* Deferred.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -426,12 +438,14 @@
 				235DEA2E287098BA006709F3 /* treefir.obj in Resources */,
 				235DEA2F287098BA006709F3 /* large_plane.obj in Resources */,
 				235DEA1B2870355A006709F3 /* cube.mtl in Resources */,
+				2313B1302875E5FC008537EB /* icosphere.obj in Resources */,
 				235DEA34287098E4006709F3 /* large_plane.mtl in Resources */,
 				235DEA0F286FEEFC006709F3 /* sphere.mtl in Resources */,
 				235DEA0D286FEEEE006709F3 /* sphere.obj in Resources */,
 				235DE9F9286F5372006709F3 /* Textures.xcassets in Resources */,
 				235DEA36287098E4006709F3 /* treefir.mtl in Resources */,
 				235DE9F7286F49F9006709F3 /* plane.mtl in Resources */,
+				2313B1322875E607008537EB /* icosphere.mtl in Resources */,
 				235DEA30287098BA006709F3 /* train.obj in Resources */,
 				235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */,
 				235DEA46287173C0006709F3 /* sun_sphere.mtl in Resources */,
@@ -464,12 +478,14 @@
 				2313B12A2875CE8B008537EB /* GBufferRenderPass.swift in Sources */,
 				2BF6A246286EC3DA0091B9D8 /* ContentView.swift in Sources */,
 				235DEA4828717642006709F3 /* DebugModels.swift in Sources */,
+				2313B12C2875DE87008537EB /* Deferred.metal in Sources */,
 				235DEA1428701E23006709F3 /* Lighting.metal in Sources */,
 				235DEA1128701599006709F3 /* Lights.swift in Sources */,
 				235DEA5328719769006709F3 /* DebugCameraFrustum.metal in Sources */,
 				235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */,
 				235DEA3A2871415E006709F3 /* RenderPass.swift in Sources */,
 				235DEA4C2871848C006709F3 /* Shadow.metal in Sources */,
+				2313B12E2875E305008537EB /* LightingRenderPass.swift in Sources */,
 				2BF6A262286EC5880091B9D8 /* Transform.swift in Sources */,
 				2BF6A288286F0A7F0091B9D8 /* Mesh.swift in Sources */,
 				235DEA5528719811006709F3 /* ShadowCamera.swift in Sources */,

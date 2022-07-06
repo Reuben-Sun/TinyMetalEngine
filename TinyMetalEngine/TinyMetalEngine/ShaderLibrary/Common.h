@@ -94,5 +94,9 @@ typedef struct {
     float shininess;   //emission
 } Material;     //Surface
 
-
+typedef enum {
+    RenderTargetAlbedo = 1,
+    RenderTargetNormal = 2,
+    RenderTargetPosition = 3
+} RenderTargetIndices;
 #endif /* Common_h */

@@ -13,6 +13,7 @@ class Renderer: NSObject {
     static var library: MTLLibrary!
     var forwardRenderPass: ForwardRenderPass
     var gBufferRenderPass: GBufferRenderPass
+    var lightingRenderPass: LightingRenderPass
     var objectIdRenderPass: ObjectIdRenderPass
     var shadowRenderPass: ShadowRenderPass
     
@@ -40,6 +41,7 @@ class Renderer: NSObject {
         
         forwardRenderPass = ForwardRenderPass(view: metalView, options: options)
         gBufferRenderPass = GBufferRenderPass(view: metalView)
+        lightingRenderPass = LightingRenderPass(view: metalView)
         objectIdRenderPass = ObjectIdRenderPass()
         shadowRenderPass = ShadowRenderPass()
         
@@ -59,6 +61,8 @@ class Renderer: NSObject {
 extension Renderer {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         forwardRenderPass.resize(view: view, size: size)
+        gBufferRenderPass.resize(view: view, size: size)
+        lightingRenderPass.resize(view: view, size: size)
         objectIdRenderPass.resize(view: view, size: size)
         shadowRenderPass.resize(view: view, size: size)
     }
@@ -91,9 +95,18 @@ extension Renderer {
                               params: params)
         
         if options.renderPath == .deferred {
-            gBufferRenderPass.descriptor = descriptor
             gBufferRenderPass.shadowTexture = shadowRenderPass.shadowTexture
             gBufferRenderPass.draw(
+                commandBuffer: commandBuffer,
+                scene: scene,
+                uniforms: uniforms,
+                params: params)
+            //传递GBuffer
+            lightingRenderPass.albedoTexture = gBufferRenderPass.albedoTexture
+            lightingRenderPass.normalTexture = gBufferRenderPass.normalTexture
+            lightingRenderPass.positionTexture = gBufferRenderPass.positionTexture
+            lightingRenderPass.descriptor = descriptor
+            lightingRenderPass.draw(
                 commandBuffer: commandBuffer,
                 scene: scene,
                 uniforms: uniforms,

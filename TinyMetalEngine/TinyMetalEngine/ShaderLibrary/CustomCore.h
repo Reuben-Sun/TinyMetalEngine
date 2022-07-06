@@ -34,4 +34,9 @@ struct VertexOut {
     float4 shadowPosition;
 };
 
+struct GBufferOut {
+    float4 albedo [[color(RenderTargetAlbedo)]];
+    float4 normal [[color(RenderTargetNormal)]];
+    float4 position [[color(RenderTargetPosition)]];
+};
 #endif /* CustomCore_h */
