@@ -68,11 +68,9 @@ enum PipelineStates {
             pipelineDescriptor.colorAttachments[0].pixelFormat = colorPixelFormat
         }
         pipelineDescriptor.setGBufferPixelFormats()
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        if !tiled {
-            pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
-            pipelineDescriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
-        }
+
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
+        pipelineDescriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
         
         pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
         return createPSO(descriptor: pipelineDescriptor)
@@ -90,11 +88,9 @@ enum PipelineStates {
         if tiled {
             pipelineDescriptor.setGBufferPixelFormats()
         }
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        if !tiled {
-            pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
-            pipelineDescriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
-        }
+        //pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
+        pipelineDescriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
         
         return createPSO(descriptor: pipelineDescriptor)
     }
@@ -111,11 +107,9 @@ enum PipelineStates {
         if tiled {
             pipelineDescriptor.setGBufferPixelFormats()
         }
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        if !tiled {
-            pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
-            pipelineDescriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
-        }
+        //pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
+        pipelineDescriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
         
         pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultLayout
         let attachment = pipelineDescriptor.colorAttachments[0]

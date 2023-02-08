@@ -37,9 +37,28 @@ struct TiledDeferredRenderPass: RenderPass{
         lightingDepthStencilState = Self.buildLightingDepthStencilState()
     }
     
+    static func buildDepthStencilState() -> MTLDepthStencilState? {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .less
+        descriptor.isDepthWriteEnabled = true
+        let frontFaceStencil = MTLStencilDescriptor()
+        frontFaceStencil.stencilCompareFunction = .always
+        frontFaceStencil.stencilFailureOperation = .keep
+        frontFaceStencil.depthFailureOperation = .keep
+        frontFaceStencil.depthStencilPassOperation = .incrementClamp
+        descriptor.frontFaceStencil = frontFaceStencil
+        return Renderer.device.makeDepthStencilState(descriptor: descriptor)
+      }
+    
     static func buildLightingDepthStencilState() -> MTLDepthStencilState? {
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.isDepthWriteEnabled = false
+        let frontFaceStencil = MTLStencilDescriptor()
+        frontFaceStencil.stencilCompareFunction = .notEqual
+        frontFaceStencil.stencilFailureOperation = .keep
+        frontFaceStencil.depthFailureOperation = .keep
+        frontFaceStencil.depthStencilPassOperation = .keep
+        descriptor.frontFaceStencil = frontFaceStencil
         return Renderer.device.makeDepthStencilState(descriptor: descriptor)
     }
     
@@ -62,7 +81,7 @@ struct TiledDeferredRenderPass: RenderPass{
             storageMode: .memoryless)
         depthTexture = Self.makeTexture(
             size: size,
-            pixelFormat: .depth32Float,
+            pixelFormat: .depth32Float_stencil8,
             label: "Depth Texture",
             storageMode: .memoryless)
     }
@@ -90,7 +109,7 @@ struct TiledDeferredRenderPass: RenderPass{
             MTLClearColor(red: 0.73, green: 0.92, blue: 1, alpha: 1)
         }
         descriptor.depthAttachment.texture = depthTexture
-        descriptor.depthAttachment.storeAction = .dontCare
+        descriptor.stencilAttachment.texture = depthTexture
         
         guard let renderEncoder =
                 commandBuffer.makeRenderCommandEncoder(
