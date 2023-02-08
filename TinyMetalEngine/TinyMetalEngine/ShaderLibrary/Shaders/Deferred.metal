@@ -66,6 +66,28 @@ fragment float4 fragment_deferredSun(VertexOut in [[stage_in]],
     return float4(color, 1);
 }
 
+fragment float4 fragment_tiled_deferredSun(VertexOut in [[stage_in]],
+                                           constant Params &params [[buffer(ParamsBuffer)]],
+                                           constant Light *lights [[buffer(LightBuffer)]],
+                                           GBufferOut gBuffer)
+{
+    float4 albedo = gBuffer.albedo;
+    float3 normal = gBuffer.normal.xyz;
+    float3 position = gBuffer.position.xyz;
+    Material material {
+        .baseColor = albedo.xyz,
+        .specularColor = float3(0),
+        .shininess = 500
+    };
+    float3 color = phongLighting(normal,
+                                 position,
+                                 params,
+                                 lights,
+                                 material);
+    color *= albedo.a;
+    return float4(color, 1);
+}
+
 struct PointLightIn {
     float4 position [[attribute(Position)]];
 };
@@ -100,6 +122,22 @@ fragment float4 fragment_pointLight(PointLightOut in [[stage_in]],
     uint2 coords = uint2(in.position.xy);
     float3 normal = normalTexture.read(coords).xyz;
     float3 position = positionTexture.read(coords).xyz;
+    
+    Material material {
+        .baseColor = 1
+    };
+    float3 lighting = calculatePoint(light, position, normal, material);
+    lighting *= 0.5;
+    return float4(lighting, 1);
+}
+
+fragment float4 fragment_tiled_pointLight(PointLightOut in [[stage_in]],
+                                          constant Light *lights [[buffer(LightBuffer)]],
+                                          GBufferOut gBuffer)
+{
+    Light light = lights[in.instanceId];
+    float3 normal = gBuffer.normal.xyz;
+    float3 position = gBuffer.position.xyz;
     
     Material material {
         .baseColor = 1

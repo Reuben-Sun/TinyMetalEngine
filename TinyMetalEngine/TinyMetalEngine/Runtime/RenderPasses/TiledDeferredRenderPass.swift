@@ -26,13 +26,13 @@ struct TiledDeferredRenderPass: RenderPass{
     init(view: MTKView) {
         gBufferPSO = PipelineStates.createGBufferPSO(
             colorPixelFormat: view.colorPixelFormat,
-            tiled: false)
+            tiled: true)
         sunLightPSO = PipelineStates.createSunLightPSO(
             colorPixelFormat: view.colorPixelFormat,
-            tiled: false)
+            tiled: true)
         pointLightPSO = PipelineStates.createPointLightPSO(
             colorPixelFormat: view.colorPixelFormat,
-            tiled: false)
+            tiled: true)
         depthStencilState = Self.buildDepthStencilState()
         lightingDepthStencilState = Self.buildLightingDepthStencilState()
     }
@@ -44,47 +44,48 @@ struct TiledDeferredRenderPass: RenderPass{
     }
     
     mutating func resize(view: MTKView, size: CGSize) {
+        //将贴图类型设为memoryless
         albedoTexture = Self.makeTexture(
             size: size,
             pixelFormat: .bgra8Unorm,
             label: "Albedo Texture",
-            storageMode: .private)
+            storageMode: .memoryless)
         normalTexture = Self.makeTexture(
             size: size,
             pixelFormat: .rgba16Float,
             label: "Normal Texture",
-            storageMode: .private)
+            storageMode: .memoryless)
         positionTexture = Self.makeTexture(
             size: size,
             pixelFormat: .rgba16Float,
             label: "Position Texture",
-            storageMode: .private)
+            storageMode: .memoryless)
         depthTexture = Self.makeTexture(
             size: size,
             pixelFormat: .depth32Float,
             label: "Depth Texture",
-            storageMode: .private)
+            storageMode: .memoryless)
     }
     
     func draw(commandBuffer: MTLCommandBuffer, scene: GameScene, uniforms: Uniforms, params: Params) {
-        // viewCurrentRenderPassDescriptor is passed in by `Renderer`
         guard let viewCurrentRenderPassDescriptor = descriptor else {
             return
         }
         
         // MARK: G-buffer pass
-        let descriptor = MTLRenderPassDescriptor()
+        let descriptor = viewCurrentRenderPassDescriptor
         let textures = [
             albedoTexture,
             normalTexture,
             positionTexture
         ]
+        //将贴图存储操作设为dontCare
         for (index, texture) in textures.enumerated() {
             let attachment =
             descriptor.colorAttachments[RenderTargetAlbedo.index + index]
             attachment?.texture = texture
             attachment?.loadAction = .clear
-            attachment?.storeAction = .store
+            attachment?.storeAction = .dontCare
             attachment?.clearColor =
             MTLClearColor(red: 0.73, green: 0.92, blue: 1, alpha: 1)
         }
@@ -101,15 +102,7 @@ struct TiledDeferredRenderPass: RenderPass{
             scene: scene,
             uniforms: uniforms,
             params: params)
-        renderEncoder.endEncoding()
         
-        // MARK: Lighting pass
-        // Set up Lighting descriptor
-        guard let renderEncoder =
-                commandBuffer.makeRenderCommandEncoder(
-                    descriptor: viewCurrentRenderPassDescriptor) else {
-            return
-        }
         drawLightingRenderPass(
             renderEncoder: renderEncoder,
             scene: scene,
@@ -117,6 +110,7 @@ struct TiledDeferredRenderPass: RenderPass{
             params: params)
         renderEncoder.endEncoding()
     }
+    
     // MARK: - G-buffer pass support
     func drawGBufferRenderPass(
         renderEncoder: MTLRenderCommandEncoder,
@@ -168,15 +162,6 @@ struct TiledDeferredRenderPass: RenderPass{
         params: Params
     ) {
         renderEncoder.pushDebugGroup("Sun Light")
-        renderEncoder.setFragmentTexture(
-            albedoTexture,
-            index: BaseColor.index)
-        renderEncoder.setFragmentTexture(
-            normalTexture,
-            index: NormalTexture.index)
-        renderEncoder.setFragmentTexture(
-            positionTexture,
-            index: NormalTexture.index + 1)
         renderEncoder.setRenderPipelineState(sunLightPSO)
         var params = params
         params.lightCount = UInt32(scene.sceneLights.dirLights.count)
