@@ -13,6 +13,7 @@
 		2313B12E2875E305008537EB /* LightingRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2313B12D2875E305008537EB /* LightingRenderPass.swift */; };
 		2313B1302875E5FC008537EB /* icosphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2313B12F2875E5FC008537EB /* icosphere.obj */; };
 		2313B1322875E607008537EB /* icosphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 2313B1312875E607008537EB /* icosphere.mtl */; };
+		2346319629934C2F00C67EFE /* TiledDeferredRenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2346319529934C2F00C67EFE /* TiledDeferredRenderPass.swift */; };
 		235DE9EA286F30CD006709F3 /* lowpoly-house.obj in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9E9286F30CD006709F3 /* lowpoly-house.obj */; };
 		235DE9EE286F30F8006709F3 /* lowpoly-house.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */; };
 		235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235DE9F0286F3B91006709F3 /* TextureController.swift */; };
@@ -82,6 +83,7 @@
 		2313B12D2875E305008537EB /* LightingRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderPass.swift; sourceTree = "<group>"; };
 		2313B12F2875E5FC008537EB /* icosphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.obj; sourceTree = "<group>"; };
 		2313B1312875E607008537EB /* icosphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icosphere.mtl; sourceTree = "<group>"; };
+		2346319529934C2F00C67EFE /* TiledDeferredRenderPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiledDeferredRenderPass.swift; sourceTree = "<group>"; };
 		235DE9E9286F30CD006709F3 /* lowpoly-house.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.obj"; sourceTree = "<group>"; };
 		235DE9ED286F30F8006709F3 /* lowpoly-house.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lowpoly-house.mtl"; sourceTree = "<group>"; };
 		235DE9F0286F3B91006709F3 /* TextureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				235DEA4928717F73006709F3 /* ShadowRenderPass.swift */,
 				2313B1292875CE8B008537EB /* GBufferRenderPass.swift */,
 				2313B12D2875E305008537EB /* LightingRenderPass.swift */,
+				2346319529934C2F00C67EFE /* TiledDeferredRenderPass.swift */,
 			);
 			path = RenderPasses;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				235DEA4828717642006709F3 /* DebugModels.swift in Sources */,
 				2313B12C2875DE87008537EB /* Deferred.metal in Sources */,
 				235DEA1428701E23006709F3 /* Lighting.metal in Sources */,
+				2346319629934C2F00C67EFE /* TiledDeferredRenderPass.swift in Sources */,
 				235DEA1128701599006709F3 /* Lights.swift in Sources */,
 				235DEA5328719769006709F3 /* DebugCameraFrustum.metal in Sources */,
 				235DE9F1286F3B91006709F3 /* TextureController.swift in Sources */,

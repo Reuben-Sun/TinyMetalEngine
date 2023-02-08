@@ -12,10 +12,11 @@ enum RenderChoice {
 }
 
 enum RenderPath {
-    case forward, deferred
+    case forward, deferred, tiled
 }
 
 class Options: ObservableObject {
     @Published var renderChoice = RenderChoice.shadered
     @Published var renderPath = RenderPath.deferred
+    @Published var tiledSupported = false
 }

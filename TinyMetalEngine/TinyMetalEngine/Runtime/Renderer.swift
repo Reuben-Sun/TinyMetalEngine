@@ -16,6 +16,7 @@ class Renderer: NSObject {
     var lightingRenderPass: LightingRenderPass
     var objectIdRenderPass: ObjectIdRenderPass
     var shadowRenderPass: ShadowRenderPass
+    var tiledDeferredRenderPass: TiledDeferredRenderPass?
     
     var options: Options
     
@@ -27,8 +28,8 @@ class Renderer: NSObject {
         
         guard let device = MTLCreateSystemDefaultDevice(),
               let commandQueue = device.makeCommandQueue() else {
-                  fatalError("GPU not available")
-              }
+            fatalError("GPU not available")
+        }
         Renderer.device = device
         Renderer.commandQueue = commandQueue
         metalView.device = device
@@ -44,6 +45,17 @@ class Renderer: NSObject {
         lightingRenderPass = LightingRenderPass(view: metalView)
         objectIdRenderPass = ObjectIdRenderPass()
         shadowRenderPass = ShadowRenderPass()
+        
+        // tile-basez，仅支持苹果芯片
+        options.tiledSupported = device.supportsFamily(.apple3)
+        if options.tiledSupported{
+            tiledDeferredRenderPass = TiledDeferredRenderPass(view: metalView)
+        }
+        else{
+            print("WARNING: TBDR features not supported. Reverting to Forward Rendering")
+            tiledDeferredRenderPass = nil
+            options.renderPath = .forward
+        }
         
         super.init()
         
@@ -65,6 +77,7 @@ extension Renderer {
         lightingRenderPass.resize(view: view, size: size)
         objectIdRenderPass.resize(view: view, size: size)
         shadowRenderPass.resize(view: view, size: size)
+        tiledDeferredRenderPass?.resize(view: view, size: size)
     }
     
     func draw(scene: GameScene, in view: MTKView) {
@@ -93,8 +106,8 @@ extension Renderer {
                               scene: scene,
                               uniforms: uniforms,
                               params: params)
-        
-        if options.renderPath == .deferred {
+        switch options.renderPath{
+        case .deferred:
             gBufferRenderPass.shadowTexture = shadowRenderPass.shadowTexture
             gBufferRenderPass.draw(
                 commandBuffer: commandBuffer,
@@ -111,10 +124,18 @@ extension Renderer {
                 scene: scene,
                 uniforms: uniforms,
                 params: params)
-        } else {
+        case .forward:
             forwardRenderPass.descriptor = descriptor
             forwardRenderPass.shadowTexture = shadowRenderPass.shadowTexture
             forwardRenderPass.draw(
+                commandBuffer: commandBuffer,
+                scene: scene,
+                uniforms: uniforms,
+                params: params)
+        case .tiled:
+            tiledDeferredRenderPass?.shadowTexture = shadowRenderPass.shadowTexture
+            tiledDeferredRenderPass?.descriptor = descriptor
+            tiledDeferredRenderPass?.draw(
                 commandBuffer: commandBuffer,
                 scene: scene,
                 uniforms: uniforms,

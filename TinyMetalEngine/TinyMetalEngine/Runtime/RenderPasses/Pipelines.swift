@@ -55,7 +55,7 @@ enum PipelineStates {
         return createPSO(descriptor: pipelineDescriptor)
     }
     
-    static func createGBufferPSO(colorPixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
+    static func createGBufferPSO(colorPixelFormat: MTLPixelFormat, tiled: Bool = false) -> MTLRenderPipelineState {
         let vertexFunction = Renderer.library?.makeFunction(name: "vertex_main")
         let fragmentFunction = Renderer.library?.makeFunction(name: "fragment_gBuffer")
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
@@ -71,9 +71,10 @@ enum PipelineStates {
         return createPSO(descriptor: pipelineDescriptor)
     }
     
-    static func createSunLightPSO(colorPixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
+    static func createSunLightPSO(colorPixelFormat: MTLPixelFormat, tiled: Bool = false) -> MTLRenderPipelineState {
         let vertexFunction = Renderer.library?.makeFunction(name: "vertex_quad")
-        let fragmentFunction = Renderer.library?.makeFunction(name: "fragment_deferredSun")
+        let fragment = tiled ? "fragment_tiled_deferredSun" : "fragment_deferredSun"
+        let fragmentFunction = Renderer.library?.makeFunction(name: fragment)
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
@@ -82,9 +83,10 @@ enum PipelineStates {
         return createPSO(descriptor: pipelineDescriptor)
     }
     
-    static func createPointLightPSO(colorPixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
+    static func createPointLightPSO(colorPixelFormat: MTLPixelFormat, tiled: Bool = false) -> MTLRenderPipelineState {
         let vertexFunction = Renderer.library?.makeFunction(name: "vertex_pointLight")
-        let fragmentFunction = Renderer.library?.makeFunction(name: "fragment_pointLight")
+        let fragment = tiled ? "fragment_tiled_pointLight" : "fragment_pointLight"
+        let fragmentFunction = Renderer.library?.makeFunction(name: fragment)
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
